@@ -1,0 +1,184 @@
+1
+00:00:00,250 --> 00:00:03,064
+This is FinPilot HomeLoan, by team
+DoubleStack.
+
+2
+00:00:03,064 --> 00:00:05,818
+It turns a home-loan file into an
+explainable,
+
+3
+00:00:05,818 --> 00:00:10,548
+RBI aligned credit decision in seconds, while
+the underwriter stays in control.
+
+4
+00:00:11,148 --> 00:00:15,794
+The pipeline shows every case: outcome, risk
+grade, fraud flags and turnaround.
+
+5
+00:00:15,794 --> 00:00:20,968
+12 synthetic Indian personas are preloaded,
+from salaried and self-employed borrowers to
+
+6
+00:00:20,968 --> 00:00:23,791
+loans against property and a forged salary
+slip.
+
+7
+00:00:26,472 --> 00:00:28,309
+Let's underwrite a new case.
+
+8
+00:00:28,309 --> 00:00:33,952
+The relationship manager picks the applicant,
+loads PAN, masked Aadhaar, salary slips,
+
+9
+00:00:33,952 --> 00:00:39,464
+Form 16, 6 months of bank statements and the
+property papers, and runs underwriting.
+
+10
+00:00:40,064 --> 00:00:45,036
+A LangGraph underwriting copilot orchestrates
+11 steps: document AI with OCR,
+
+11
+00:00:45,036 --> 00:00:50,782
+cross-checks and tampering heuristics, bank
+analytics, eligibility, fraud and compliance,
+
+12
+00:00:50,782 --> 00:00:55,366
+a calibrated risk model, a Monte Carlo
+capacity test, and the decision.
+
+13
+00:00:55,967 --> 00:00:58,819
+Karthik's FOIR would be 79% against a 60%
+cap,
+
+14
+00:00:58,819 --> 00:01:01,423
+because of a car loan and a personal loan.
+
+15
+00:01:01,423 --> 00:01:06,135
+So the engine approves with conditions:
+reduce the amount to about ₹37 lakh,
+
+16
+00:01:06,135 --> 00:01:09,049
+or add a co-applicant, or close existing
+loans.
+
+17
+00:01:09,049 --> 00:01:11,095
+Every reason is in plain English.
+
+18
+00:01:11,696 --> 00:01:16,621
+The underwriter sees each document beside its
+extracted fields, OCR confidence and
+
+19
+00:01:16,621 --> 00:01:21,066
+cross-document checks on name, date of birth,
+employer and salary credits.
+
+20
+00:01:21,066 --> 00:01:23,469
+PAN and Aadhaar are masked at ingestion.
+
+21
+00:01:25,480 --> 00:01:30,130
+The LightGBM model gives a calibrated
+probability of default with SHAP reasons,
+
+22
+00:01:30,130 --> 00:01:35,015
+and FinPilot's Monte Carlo stress test checks
+repayment capacity after the new EMI.
+
+23
+00:01:35,015 --> 00:01:37,311
+Policy rules always dominate the model.
+
+24
+00:01:37,912 --> 00:01:43,819
+Every rule fired carries its policy rule ID
+and regulatory citation, such as the RBI
+
+25
+00:01:43,819 --> 00:01:48,953
+Housing Finance Company Directions 2025, para
+58, for loan-to-value caps.
+
+26
+00:01:49,554 --> 00:01:51,956
+The underwriter can question the copilot.
+
+27
+00:01:51,956 --> 00:01:57,053
+Answers are grounded only in the case data
+and the policy file, and they cite rule IDs.
+
+28
+00:01:57,053 --> 00:01:59,806
+It works offline, or with a local Ollama
+model.
+
+29
+00:02:04,495 --> 00:02:08,084
+The underwriter can override any decision,
+but must record a reason.
+
+30
+00:02:08,084 --> 00:02:10,934
+The override is written to a hash-chained
+audit trail,
+
+31
+00:02:10,934 --> 00:02:14,259
+and the credit memo and sanction letter draft
+update instantly.
+
+32
+00:02:21,185 --> 00:02:22,754
+Here is the fraud persona.
+
+33
+00:02:22,754 --> 00:02:27,219
+The salary slip was edited in iLovePDF, the
+net pay uses a different font,
+
+34
+00:02:27,219 --> 00:02:29,994
+and bank credits are half the declared
+income.
+
+35
+00:02:29,994 --> 00:02:32,528
+The engine declines, with written reasons.
+
+36
+00:02:33,130 --> 00:02:35,418
+FinPilot HomeLoan: faster turnaround,
+
+37
+00:02:35,418 --> 00:02:39,437
+consistent policy and audit-ready files for
+Hero Housing Finance.
+
+38
+00:02:39,437 --> 00:02:44,261
+Decision support for underwriters; final
+decisions follow the lender's policy.
+
+39
+00:02:44,261 --> 00:02:44,879
+Thank you.
