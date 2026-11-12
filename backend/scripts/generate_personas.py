@@ -1029,6 +1029,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out", type=Path, default=DEFAULT_OUT)
     ap.add_argument("--only", default="", help="comma-separated persona ids")
     ap.add_argument("--zip", action="store_true", help="also write <pid>_upload_pack.zip per persona")
+    ap.add_argument("--warm-ocr", action="store_true",
+                    help="OCR every PNG once to fill the disk OCR cache (backend/.data/ocr_cache) for instant demos")
     a = ap.parse_args(argv)
     only = {x.strip() for x in a.only.split(",") if x.strip()}
     a.out.mkdir(parents=True, exist_ok=True)
@@ -1038,6 +1040,13 @@ def main(argv: list[str] | None = None) -> int:
         exp = build_persona(p, a.out, a.zip)
         size = sum(f.stat().st_size for f in (a.out / p.pid).iterdir())
         print(f"{p.pid}  {p.title[:58]:<58} {len(exp['documents']):>2} docs  {size / 1024:7.0f} KB  -> {p.expected_outcome}")
+    if a.warm_ocr:
+        sys.path.insert(0, str(REPO / "backend"))
+        from app.documents import ocr
+
+        pngs = [f.read_bytes() for p in PERSONAS if not only or p.pid in only for f in sorted((a.out / p.pid).glob("*.png"))]
+        ocr.warm(pngs)
+        print(f"OCR cache warmed for {len(pngs)} images with {ocr.engine_name()}")
     return 0
 
 

@@ -144,3 +144,19 @@ def test_ocr_disabled_degrades_gracefully(monkeypatch: pytest.MonkeyPatch) -> No
     finally:
         monkeypatch.delenv("OCR_ENGINE")
         ocr.reset_engine()
+
+
+def test_ocr_disk_cache_roundtrip(monkeypatch: pytest.MonkeyPatch, tmp_path) -> None:  # type: ignore[no-untyped-def]
+    from documents_support import PERSONA_DIR
+
+    card = PERSONA_DIR / "p01" / "pan_card.png"
+    if not card.exists() or ocr.engine_name() == "none":
+        pytest.skip("needs generated personas and an OCR engine")
+    monkeypatch.setenv("OCR_CACHE_DIR", str(tmp_path))
+    ocr.reset_engine()
+    first = ocr.ocr_image(card.read_bytes())
+    assert list(tmp_path.glob("*.json"))
+    ocr.reset_engine()  # drop the in-memory cache
+    second = ocr.ocr_image(card.read_bytes())
+    assert second.text == first.text and "ocr-cache:disk" in second.notes
+    ocr.reset_engine()

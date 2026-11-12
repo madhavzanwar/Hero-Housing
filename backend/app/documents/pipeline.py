@@ -17,9 +17,8 @@ from statistics import mean
 from typing import Any
 
 from app.documents import crosscheck as cc
-from app.documents import ocr
+from app.documents import ocr, tamper
 from app.documents import parsers as P  # noqa: N812
-from app.documents import tamper
 from app.documents._mask import mask_aadhaar, mask_pan, redact_text
 from app.documents.classify import classify
 from app.documents.extract import RawContent, extract, sniff_mime
