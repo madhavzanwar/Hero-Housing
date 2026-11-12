@@ -1,0 +1,23 @@
+# SYNTHETIC negative list for the FinPilot HomeLoan demo.
+# Every name below is FICTITIOUS. Any resemblance to a real person is coincidental.
+# Types: PEP (politically exposed person -> enhanced due diligence / REFER),
+#        SANCTIONS (UNSC / UAPA-style designation -> DECLINE on confirmed match),
+#        INTERNAL_DEFAULTER (lender's own wilful-defaulter / write-off list),
+#        FRAUD_DB (industry fraud registry, e.g. CRILIC/hunter-style).
+version: "synthetic-2026.11"
+entries:
+  - { name: "Vikram Rathore Singhania", type: PEP, pan_masked: "XXXXX7319K", dob: "1979-03-14", detail: "Member of a (fictitious) state legislative council; relative holds a public office" }
+  - { name: "Meenakshi Sundaravel Iyer", type: PEP, detail: "Former (fictitious) municipal corporation chairperson" }
+  - { name: "Harbhajan Lal Dhingra", type: PEP, detail: "Senior official of a (fictitious) public sector undertaking" }
+  - { name: "Rafiq Anwar Qureshi", type: SANCTIONS, pan_masked: "XXXXX4471Q", detail: "Designated on a (synthetic) UNSC-style consolidated list" }
+  - { name: "Dmitri Kovalenko Orlov", type: SANCTIONS, detail: "Designated on a (synthetic) UNSC-style consolidated list" }
+  - { name: "Saleem Yusuf Barakzai", type: SANCTIONS, detail: "Designated under a (synthetic) UAPA-style schedule" }
+  - { name: "Arvind Kumar Tandulkar", type: INTERNAL_DEFAULTER, pan_masked: "XXXXX8812T", detail: "Wilful default on a 2021 LAP account, written off" }
+  - { name: "Sunita Prakash Malhotra", type: INTERNAL_DEFAULTER, pan_masked: "XXXXX2290M", detail: "Home loan NPA, settled below dues (OTS) in 2023" }
+  - { name: "Gurpreet Singh Bhullarwal", type: INTERNAL_DEFAULTER, detail: "Guarantor on a defaulted business loan" }
+  - { name: "Nitin Ramesh Khandelwal", type: FRAUD_DB, pan_masked: "XXXXX5634K", detail: "Forged salary slips reported by another lender" }
+  - { name: "Pooja Venkat Rao Desai", type: FRAUD_DB, detail: "Identity used in a reported impersonation fraud" }
+  - { name: "Karan Mehul Zaveri", type: FRAUD_DB, pan_masked: "XXXXX9087Z", detail: "Double financing of the same property reported" }
+  - { name: "Lakshmi Narayan Pillai Varma", type: FRAUD_DB, detail: "Fabricated ITR acknowledgements reported" }
+  - { name: "Imran Shaukat Mirza", type: PEP, detail: "Close associate of a (fictitious) senior political functionary" }
+  - { name: "Devendra Pratap Chauhan", type: INTERNAL_DEFAULTER, pan_masked: "XXXXX3345C", detail: "Repeated NACH dishonour, account closed with dues" }
