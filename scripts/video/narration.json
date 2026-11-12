@@ -1,0 +1,14 @@
+[
+  {"id": "intro", "text": "This is FinPilot HomeLoan, by team DoubleStack. It turns a home-loan file into an explainable, R B I aligned credit decision in seconds, while the underwriter stays in control."},
+  {"id": "pipeline", "text": "The pipeline shows every case: outcome, risk grade, fraud flags and turnaround. Twelve synthetic Indian personas are preloaded, from salaried and self-employed borrowers to loans against property and a forged salary slip."},
+  {"id": "newcase", "text": "Let's underwrite a new case. The relationship manager picks the applicant, loads PAN, masked Aadhaar, salary slips, Form sixteen, six months of bank statements and the property papers, and runs underwriting."},
+  {"id": "graph", "text": "A LangGraph underwriting copilot orchestrates eleven steps: document A I with OCR, cross-checks and tampering heuristics, bank analytics, eligibility, fraud and compliance, a calibrated risk model, a Monte Carlo capacity test, and the decision."},
+  {"id": "decision", "text": "Karthik's FOIR would be seventy-nine percent against a sixty percent cap, because of a car loan and a personal loan. So the engine approves with conditions: reduce the amount to about thirty-seven lakh, or add a co-applicant, or close existing loans. Every reason is in plain English."},
+  {"id": "documents", "text": "The underwriter sees each document beside its extracted fields, OCR confidence and cross-document checks on name, date of birth, employer and salary credits. PAN and Aadhaar are masked at ingestion."},
+  {"id": "risk", "text": "The LightGBM model gives a calibrated probability of default with SHAP reasons, and FinPilot's Monte Carlo stress test checks repayment capacity after the new E M I. Policy rules always dominate the model."},
+  {"id": "rules", "text": "Every rule fired carries its policy rule I D and regulatory citation, such as the R B I Housing Finance Company Directions twenty twenty-five, paragraph fifty-eight, for loan-to-value caps."},
+  {"id": "copilot", "text": "The underwriter can question the copilot. Answers are grounded only in the case data and the policy file, and they cite rule I Ds. It works offline, or with a local Ollama model."},
+  {"id": "override", "text": "The underwriter can override any decision, but must record a reason. The override is written to a hash-chained audit trail, and the credit memo and sanction letter draft update instantly."},
+  {"id": "fraud", "text": "Here is the fraud persona. The salary slip was edited in iLovePDF, the net pay uses a different font, and bank credits are half the declared income. The engine declines, with written reasons."},
+  {"id": "outro", "text": "FinPilot HomeLoan: faster turnaround, consistent policy and audit-ready files for Hero Housing Finance. Decision support for underwriters; final decisions follow the lender's policy. Thank you."}
+]
