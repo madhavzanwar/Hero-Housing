@@ -1,0 +1,239 @@
+[
+  {
+    "id": "p01",
+    "title": "Clean salaried IT engineer, Pune",
+    "segment": "Salaried - Prime",
+    "product": "HOME_LOAN",
+    "outcome": "APPROVE",
+    "expected": [
+      "APPROVE"
+    ],
+    "match": true,
+    "pd": 0.0023,
+    "grade": "A",
+    "sanctioned": 4500000.0,
+    "flags": 0,
+    "rules_failed": [],
+    "ms": 11624
+  },
+  {
+    "id": "p02",
+    "title": "Govt teacher couple with co-applicant, Nagpur",
+    "segment": "Salaried - Government",
+    "product": "HOME_LOAN",
+    "outcome": "APPROVE",
+    "expected": [
+      "APPROVE"
+    ],
+    "match": true,
+    "pd": 0.0037,
+    "grade": "A",
+    "sanctioned": 2200000.0,
+    "flags": 0,
+    "rules_failed": [],
+    "ms": 4440
+  },
+  {
+    "id": "p03",
+    "title": "Self-employed Chartered Accountant, Mumbai",
+    "segment": "Self-employed Professional",
+    "product": "HOME_LOAN",
+    "outcome": "APPROVE",
+    "expected": [
+      "APPROVE"
+    ],
+    "match": true,
+    "pd": 0.0023,
+    "grade": "A",
+    "sanctioned": 11000000.0,
+    "flags": 0,
+    "rules_failed": [],
+    "ms": 11123
+  },
+  {
+    "id": "p04",
+    "title": "Kirana trader LAP for business expansion, Indore",
+    "segment": "Self-employed Business - LAP",
+    "product": "LAP",
+    "outcome": "APPROVE_WITH_CONDITIONS",
+    "expected": [
+      "APPROVE_WITH_CONDITIONS",
+      "REFER"
+    ],
+    "match": true,
+    "pd": 0.0127,
+    "grade": "A",
+    "sanctioned": 3500000.0,
+    "flags": 0,
+    "rules_failed": [],
+    "ms": 14740
+  },
+  {
+    "id": "p05",
+    "title": "Salaried with heavy existing EMIs (FOIR breach), Bengaluru",
+    "segment": "Salaried - Prime",
+    "product": "HOME_LOAN",
+    "outcome": "APPROVE_WITH_CONDITIONS",
+    "expected": [
+      "APPROVE_WITH_CONDITIONS"
+    ],
+    "match": true,
+    "pd": 0.0947,
+    "grade": "C",
+    "sanctioned": 3710000.0,
+    "flags": 0,
+    "rules_failed": [
+      "ELG-FOIR-03"
+    ],
+    "ms": 15194
+  },
+  {
+    "id": "p06",
+    "title": "Borderline: bureau 680, NACH bounces, thin buffer, Hyderabad",
+    "segment": "Salaried - Near prime",
+    "product": "HOME_LOAN",
+    "outcome": "REFER",
+    "expected": [
+      "REFER"
+    ],
+    "match": true,
+    "pd": 0.1645,
+    "grade": "D",
+    "sanctioned": 3020000.0,
+    "flags": 0,
+    "rules_failed": [
+      "ELG-FOIR-02",
+      "CAP-MC-01"
+    ],
+    "ms": 21397
+  },
+  {
+    "id": "p07",
+    "title": "FRAUD: tampered salary slips, inflated income, Noida",
+    "segment": "Salaried - Fraud",
+    "product": "HOME_LOAN",
+    "outcome": "DECLINE",
+    "expected": [
+      "DECLINE"
+    ],
+    "match": true,
+    "pd": 0.0849,
+    "grade": "C",
+    "sanctioned": 0.0,
+    "flags": 21,
+    "rules_failed": [
+      "ELG-FOIR-02",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-DOC-01",
+      "FRD-INC-01"
+    ],
+    "ms": 15539
+  },
+  {
+    "id": "p08",
+    "title": "Age 54, 25-year tenure ask, 95% LTV, low income, Jaipur",
+    "segment": "Salaried - Decline",
+    "product": "HOME_LOAN",
+    "outcome": "DECLINE",
+    "expected": [
+      "DECLINE"
+    ],
+    "match": true,
+    "pd": 0.3846,
+    "grade": "E",
+    "sanctioned": 0.0,
+    "flags": 0,
+    "rules_failed": [
+      "ELG-FOIR-01",
+      "LTV-HL-01",
+      "RSK-PD-01",
+      "CAP-MC-01"
+    ],
+    "ms": 23027
+  },
+  {
+    "id": "p09",
+    "title": "LAP for doctor's clinic on commercial property, Chennai",
+    "segment": "Self-employed Professional - LAP",
+    "product": "LAP",
+    "outcome": "APPROVE",
+    "expected": [
+      "APPROVE"
+    ],
+    "match": true,
+    "pd": 0.001,
+    "grade": "A",
+    "sanctioned": 8000000.0,
+    "flags": 0,
+    "rules_failed": [],
+    "ms": 28498
+  },
+  {
+    "id": "p10",
+    "title": "LAP for stock-market investment + gambling spends, Delhi",
+    "segment": "Self-employed Business - LAP",
+    "product": "LAP",
+    "outcome": "DECLINE",
+    "expected": [
+      "DECLINE",
+      "REFER"
+    ],
+    "match": true,
+    "pd": 0.0174,
+    "grade": "A",
+    "sanctioned": 0.0,
+    "flags": 0,
+    "rules_failed": [
+      "CMP-LAP-01"
+    ],
+    "ms": 19990
+  },
+  {
+    "id": "p11",
+    "title": "Returning NRI - negative-list (PEP) name match, Mumbai",
+    "segment": "Salaried - EDD",
+    "product": "HOME_LOAN",
+    "outcome": "REFER",
+    "expected": [
+      "REFER"
+    ],
+    "match": true,
+    "pd": 0.0049,
+    "grade": "A",
+    "sanctioned": 15000000.0,
+    "flags": 0,
+    "rules_failed": [],
+    "ms": 8680
+  },
+  {
+    "id": "p12",
+    "title": "Young first-home buyer, LTV just over 90%, Ahmedabad",
+    "segment": "Salaried - First home",
+    "product": "HOME_LOAN",
+    "outcome": "APPROVE_WITH_CONDITIONS",
+    "expected": [
+      "APPROVE_WITH_CONDITIONS"
+    ],
+    "match": true,
+    "pd": 0.0072,
+    "grade": "A",
+    "sanctioned": 2790000.0,
+    "flags": 0,
+    "rules_failed": [
+      "LTV-HL-01"
+    ],
+    "ms": 17202
+  }
+]
