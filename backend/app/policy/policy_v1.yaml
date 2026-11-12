@@ -14,7 +14,7 @@ currency: INR
 references:
   RBI_HF_MC: "RBI Master Circular - Housing Finance (DOR.CRE.REC.No.06/08.12.001/2023-24 and updates), para 2.3.1 - LTV for individual housing loans"
   RBI_RW_2020: "RBI circular DOR.BP.BC.No.24/21.06.001/2020-21 (16-Oct-2020) - Individual Housing Loans: Rationalisation of Risk Weights (LTV <=30L 90%, 30-75L 80%, >75L 75%)"
-  RBI_HFC_MD: "RBI Master Direction - Non-Banking Financial Company - Housing Finance Company (Reserve Bank) Directions, 2021 (as consolidated in HFC Directions 2025) - LTV caps for HFC housing loans"
+  RBI_HFC_MD: "Reserve Bank of India (Housing Finance Companies) Directions, 2025 - RBI/DoR/2025-26/365, DoR.FIN.REC.284/03-10-119/2025-26 (28-Nov-2025), para 58: no HFC shall grant housing loans to individuals up to Rs 30 lakh with LTV > 90%, Rs 30-75 lakh with LTV > 80%, above Rs 75 lakh with LTV > 75%; LTV on realisable value excluding stamp duty/registration (except dwelling units up to Rs 10 lakh)"
   RBI_KYC_MD: "RBI Master Direction - Know Your Customer (KYC) Direction, 2016 (updated) - CDD, OVDs, PAN/Form 60, PEP due diligence, UNSC/UAPA list screening"
   RBI_FPC: "RBI Fair Practices Code for HFCs/NBFCs - written reasons for rejection, sanction letter with all-in cost, Key Facts Statement"
   RBI_KFS: "RBI circular DOR.STR.REC.13/13.03.00/2024-25 (15-Apr-2024) - Key Facts Statement for loans & advances"
@@ -68,10 +68,10 @@ eligibility:
 
 ltv:
   HOME_LOAN:
-    # Regulatory caps — RBI_RW_2020 / RBI_HF_MC / RBI_HFC_MD
-    - { id: LTV-HL-01, max_loan: 3000000,  cap: 0.90, ref: RBI_RW_2020 }
-    - { id: LTV-HL-02, max_loan: 7500000,  cap: 0.80, ref: RBI_RW_2020 }
-    - { id: LTV-HL-03, max_loan: null,     cap: 0.75, ref: RBI_RW_2020 }
+    # Regulatory caps — RBI HFC Directions 2025 para 58 (primary), same slabs as RBI_RW_2020 for banks
+    - { id: LTV-HL-01, max_loan: 3000000,  cap: 0.90, ref: RBI_HFC_MD }
+    - { id: LTV-HL-02, max_loan: 7500000,  cap: 0.80, ref: RBI_HFC_MD }
+    - { id: LTV-HL-03, max_loan: null,     cap: 0.75, ref: RBI_HFC_MD }
   LAP:
     # Internal policy (no RBI regulatory LTV for LAP; prudent HFC practice)
     RESIDENTIAL: { id: LTV-LAP-01, cap: 0.65 }
@@ -172,9 +172,9 @@ rules:
   ELG-FOIR-02:  { name: "FOIR cap (income Rs 50,001 - 1,00,000)", category: ELIGIBILITY, ref: RBI_FPC }
   ELG-FOIR-03:  { name: "FOIR cap (income Rs 1,00,001 - 2,00,000)", category: ELIGIBILITY, ref: RBI_FPC }
   ELG-FOIR-04:  { name: "FOIR cap (income above Rs 2,00,000)", category: ELIGIBILITY, ref: RBI_FPC }
-  LTV-HL-01:    { name: "LTV cap 90% (home loan up to Rs 30 lakh)", category: ELIGIBILITY, ref: RBI_RW_2020 }
-  LTV-HL-02:    { name: "LTV cap 80% (home loan Rs 30-75 lakh)", category: ELIGIBILITY, ref: RBI_RW_2020 }
-  LTV-HL-03:    { name: "LTV cap 75% (home loan above Rs 75 lakh)", category: ELIGIBILITY, ref: RBI_RW_2020 }
+  LTV-HL-01:    { name: "LTV cap 90% (home loan up to Rs 30 lakh)", category: ELIGIBILITY, ref: RBI_HFC_MD }
+  LTV-HL-02:    { name: "LTV cap 80% (home loan Rs 30-75 lakh)", category: ELIGIBILITY, ref: RBI_HFC_MD }
+  LTV-HL-03:    { name: "LTV cap 75% (home loan above Rs 75 lakh)", category: ELIGIBILITY, ref: RBI_HFC_MD }
   LTV-LAP-01:   { name: "LTV cap LAP - residential property", category: ELIGIBILITY, ref: null }
   LTV-LAP-02:   { name: "LTV cap LAP - commercial property", category: ELIGIBILITY, ref: null }
   LTV-LAP-03:   { name: "LTV cap LAP - plot", category: ELIGIBILITY, ref: null }
