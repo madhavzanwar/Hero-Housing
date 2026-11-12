@@ -85,11 +85,19 @@ def income_evidence(form: ApplicationForm, bundle: DocumentBundle, bank: BankAna
     else:
         haircut = float(policy.get("eligibility.self_employed_income_haircut", 0.10))
         itr = itr_monthly(bundle)
+        # Business credits in a bank statement are turnover, not income: when ITRs are available the
+        # bank is only a sanity check (credits must at least cover the ITR income); otherwise the
+        # robust bank-credit estimate is used.
         if itr > 0:
             sources["itr_monthly_after_haircut"] = itr * (1 - haircut)
-        if bank.income_estimate > 0:
-            sources["bank_credit_income"] = bank.income_estimate
-        basis = f"minimum of declared income, ITR income / 12 less {pct(haircut, 0)} haircut and bank-credit income"
+            if 0 < bank.avg_monthly_credits < itr * (1 - haircut):
+                sources["bank_monthly_credits"] = bank.avg_monthly_credits
+            basis = (f"minimum of declared income and ITR income / 12 less {pct(haircut, 0)} haircut "
+                     f"(bank credits checked to cover it)")
+        else:
+            if bank.income_estimate > 0:
+                sources["bank_credit_income"] = bank.income_estimate
+            basis = "minimum of declared income and bank-credit income (no ITR available)"
         evidenced = itr or bank.income_estimate or 0.0
     assessed = min(sources.values())
     return {"sources": sources, "assessed": assessed, "basis": basis, "evidenced": evidenced, "declared": declared}
@@ -185,8 +193,8 @@ def assess(
     elif form.tenure_months > tenure_cap:
         hits.append(hit(policy, "ELG-TEN-01", OC.WARN,
                         f"Requested tenure of {form.tenure_months} months is restricted to {tenure_cap} months "
-                        f"(loan must mature by age {max_age_mat:.0f} / product maximum).",
-                        effect="CONDITION", severity=S.MEDIUM, evidence={**ten_ev, "condition": "REDUCE_TENURE"}))
+                        f"(loan must mature by age {max_age_mat:.0f} / product maximum); the offer is priced on that tenure.",
+                        severity=S.LOW, evidence=ten_ev))
     else:
         hits.append(hit(policy, "ELG-TEN-01", OC.PASS,
                         f"Tenure of {form.tenure_months} months is within the maximum of {tenure_cap} months.",

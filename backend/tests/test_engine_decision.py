@@ -159,10 +159,11 @@ def test_missing_docs_and_encumbrance_conditions():
     assert "Form 16" in sub.text
 
 
-def test_tenure_cap_adds_reduce_tenure_condition():
+def test_tenure_cap_alone_still_approves_at_capped_tenure():
     d, e = pipeline(form(dob=date(1975, 1, 1), tenure_months=300, loan_amount=2_000_000))
     assert d.tenure_months == e.max_tenure_months < 300
-    assert "REDUCE_TENURE" in codes(d)
+    assert d.outcome == D.APPROVE
+    assert f"over {e.max_tenure_months} months" in d.reasons[0]
 
 
 def test_decision_without_capacity_and_rules_have_refs():
@@ -187,3 +188,18 @@ def test_pricing_grid():
     assert pricing.rate_for(se, "A", POLICY) == pytest.approx(0.086)
     lap = form(product=Product.LAP)
     assert pricing.rate_for(lap, "E", POLICY) == pytest.approx(0.0975 + 0.0175)
+
+
+def test_capacity_shortfall_refers_salaried_but_conditions_self_employed():
+    from app.schemas import RepaymentCapacity
+    bad = RepaymentCapacity(health_score=30, monthly_surplus_after_emi=-20000, prob_shortfall=0.95, stress_emi_coverage=0.4)
+    f = form()
+    b = bundle()
+    ba = bank.analyze(statement(), POLICY)
+    e, hits = eligibility.assess(f, b, ba, POLICY, 0.0835, as_of=AS_OF)
+    assert decision.decide(f, e, risk(), bad, hits, b, POLICY, STARTED).outcome == D.REFER
+    se = form(employment_type=EmploymentType.SELF_EMPLOYED, years_in_job=8)
+    sb = bundle(salaried=False, income_docs={"type": "ITR", "annual_income": 2_400_000})
+    e, hits = eligibility.assess(se, sb, ba, POLICY, 0.086, as_of=AS_OF)
+    d = decision.decide(se, e, risk(), bad, hits, sb, POLICY, STARTED)
+    assert d.outcome == D.APPROVE_WITH_CONDITIONS and "EMI_RESERVE" in codes(d)

@@ -96,7 +96,10 @@ def assess(
     seed: int = 42,
     annual_rate: float | None = None,
     tenure_months: int | None = None,
+    rent_ceases: bool = False,
 ) -> RepaymentCapacity:
+    """`rent_ceases=True` (home-loan purchase of a self-occupied home): the rent seen in the statement is
+    added back to monthly cash flow, since the EMI replaces it."""
     cfg = policy.section("capacity")
     iters = int(cfg.get("monte_carlo_iterations", 1000))
     horizon = int(cfg.get("horizon_months", 24))
@@ -107,10 +110,12 @@ def assess(
 
     monthly = bank.monthly
     credits = [float(m["credits"]) for m in monthly]
-    debits = [float(m["debits"]) for m in monthly]
+    rent_back = bank.avg_monthly_rent if rent_ceases else 0.0
+    debits = [max(float(m["debits"]) - rent_back, 0.0) for m in monthly]
     nets = _winsorise([c - d for c, d in zip(credits, debits, strict=False)])
-    income = bank.income_estimate or (statistics.fmean(credits) if credits else 0.0)
-    mean_credit = statistics.fmean(credits) if credits else income
+    # inflows are measured as total monthly credits (salary or business receipts alike)
+    mean_credit = statistics.fmean(credits) if credits else bank.income_estimate
+    income = mean_credit or bank.income_estimate
     mean_debit = statistics.fmean(debits) if debits else 0.0
     mean_net = statistics.fmean(nets) if nets else 0.0
     start = bank.latest_balance or bank.avg_monthly_balance
@@ -152,7 +157,8 @@ def assess(
 
     basis = (f"FinPilot 5-pillar health score and {iters}-path Monte Carlo ({method}) over {horizon} months, "
              f"starting from a balance of {fmt_inr(start)} with the proposed EMI of {fmt_inr(proposed_emi)} deducted; "
-             f"stress: +{bps} bps and -{shock * 100:.0f}% income.")
+             f"stress: +{bps} bps and -{shock * 100:.0f}% income"
+             + (f"; current rent of {fmt_inr(rent_back)} assumed to stop after purchase." if rent_back else "."))
     return RepaymentCapacity(
         health_score=round(health, 1),
         sub_scores=subs,

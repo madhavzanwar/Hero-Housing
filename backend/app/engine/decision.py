@@ -21,6 +21,7 @@ from app.schemas import (
     DecisionOutcome,
     DocumentBundle,
     Eligibility,
+    EmploymentType,
     Product,
     RepaymentCapacity,
     RiskScore,
@@ -75,7 +76,7 @@ def _risk_hit(risk: RiskScore, policy: Policy, other_decline: bool) -> RuleHit:
     return hit(policy, "RSK-PD-01", OC.FAIL, base, effect="DECLINE", severity=S.HIGH, evidence=ev)
 
 
-def _capacity_hits(capacity: RepaymentCapacity | None, policy: Policy) -> list[RuleHit]:
+def _capacity_hits(capacity: RepaymentCapacity | None, policy: Policy, self_employed: bool = False) -> list[RuleHit]:
     if capacity is None:
         return []
     c = policy.section("capacity")
@@ -83,7 +84,14 @@ def _capacity_hits(capacity: RepaymentCapacity | None, policy: Policy) -> list[R
     ev = {"prob_shortfall": capacity.prob_shortfall, "surplus_after_emi": capacity.monthly_surplus_after_emi,
           "health_score": capacity.health_score, "iterations": capacity.iterations}
     out: list[RuleHit] = []
-    if capacity.prob_shortfall > ref:
+    if capacity.prob_shortfall > ref and self_employed:
+        # business accounts route purchases / turnover through debits, so statement net flow understates
+        # repayment capacity; FOIR on ITR income governs, and the shortfall becomes an EMI-reserve condition
+        out.append(hit(policy, "CAP-MC-01", OC.WARN,
+                       f"Monte Carlo simulation shows a {pct(capacity.prob_shortfall, 0)} chance of a cash shortfall on the "
+                       f"business account (turnover-heavy debits); an EMI reserve and NACH on the main account are required.",
+                       effect="CONDITION", severity=S.MEDIUM, evidence={**ev, "condition": "EMI_RESERVE"}))
+    elif capacity.prob_shortfall > ref:
         out.append(hit(policy, "CAP-MC-01", OC.FAIL,
                        f"Monte Carlo simulation ({capacity.iterations} runs) shows a {pct(capacity.prob_shortfall, 0)} chance "
                        f"that the bank buffer turns negative within the horizon after paying the EMI.",
@@ -155,7 +163,7 @@ def decide(
 
     pre_decline = any(h.effect == "DECLINE" for h in hits)
     hits.append(_risk_hit(risk, policy, pre_decline))
-    hits.extend(_capacity_hits(capacity, policy))
+    hits.extend(_capacity_hits(capacity, policy, form.employment_type == EmploymentType.SELF_EMPLOYED))
     auto_max = float(dcfg.get("auto_approve_max_amount", 2e7))
     if requested > auto_max:
         hits.append(hit(policy, "DEC-AMT-01", OC.WARN,
@@ -259,6 +267,9 @@ def decide(
     else:
         head = "Approved" if outcome == D.APPROVE else "Approved with conditions"
         reasons.append(f"{head} for {fmt_inr(sanction)} over {tenure} months at {pct(rate, 2)} (EMI {fmt_inr(final_emi)}).")
+        if tenure < form.tenure_months:
+            reasons.append(f"Tenure set to {tenure} months (requested {form.tenure_months}) so that the loan matures "
+                           f"within the age / product limit.")
         reasons += [h.detail for h in _ordered(reduces)]
         reasons += [h.detail for h in _ordered([h for h in hits if h.effect == "CONDITION" and h.outcome != OC.PASS])]
         foir_final = (oblig + final_emi) / income if income else 0.0

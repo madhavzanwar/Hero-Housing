@@ -25,6 +25,7 @@ NON_LOAN_RE = re.compile(
 BOUNCE_RE = re.compile(r"(RETURN|BOUNCE|INSUFFICIENT|INSUFF|ECS RTN|NACH RTN|\bRTN\b|DISHONOU?R|UNPAID|REVERSAL OF NACH)", re.I)
 CHARGE_RE = re.compile(r"\b(CHARGE|CHARGES|CHG|CHGS|PENALTY|FEE)\b", re.I)
 CASH_DEP_RE = re.compile(r"(CASH DEP|CASH DEPOSIT|\bCDM\b|BY CASH|CASH-DEP|CSH DEP)", re.I)
+RENT_RE = re.compile(r"\b(RENT|RENTAL|LANDLORD|HOUSE RENT)\b", re.I)
 TRANSFER_HINT_RE = re.compile(r"\b(NEFT|IMPS|RTGS|UPI|TRF|TRANSFER)\b", re.I)
 _LENDER_STOP = {
     "EMI", "NACH", "ACH", "LOAN", "ECS", "DR", "CR", "SI", "MANDATE", "DEBIT", "TO", "BY", "FOR",
@@ -235,6 +236,9 @@ def analyze(transactions: list[Transaction], policy: Policy, employer: str | Non
     keys = [(t.date, t.description.strip().upper(), t.amount, t.balance) for t in txns]
     dup_share = 1 - len(set(keys)) / len(keys)
 
+    # ------------------------------------------------------------- rent
+    rent_total = -sum(t.amount for t in txns if t.amount < 0 and (_is(t, "RENT") or RENT_RE.search(t.description)))
+
     # ------------------------------------------------------------- income estimate
     if avg_salary > 0:
         income_estimate = avg_salary
@@ -277,4 +281,5 @@ def analyze(transactions: list[Transaction], policy: Policy, employer: str | Non
         round_number_share=round(round_share, 4),
         duplicate_txn_share=round(dup_share, 4),
         latest_balance=round(balances[-1], 2),
+        avg_monthly_rent=round(rent_total / n_months, 2),
     )

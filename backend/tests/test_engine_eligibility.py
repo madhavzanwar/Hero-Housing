@@ -136,7 +136,7 @@ def test_age_at_maturity_caps_tenure():
     e, hits, _ = run(f)
     assert 70 <= e.max_tenure_months <= 72
     h = hits["ELG-TEN-01"]
-    assert h.outcome == RuleOutcome.WARN and h.evidence["condition"] == "REDUCE_TENURE"
+    assert h.outcome == RuleOutcome.WARN and h.effect == "NONE"
     assert e.tenure_months == e.max_tenure_months
     assert e.age_at_maturity <= 60.0
 

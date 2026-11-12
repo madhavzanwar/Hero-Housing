@@ -72,3 +72,14 @@ def test_pillar_formulas_follow_finpilot():
     assert forecast.score_spending_consistency(0.25)[0] == 75
     assert forecast.score_debt_pressure(0.0, 0)[0] == 100
     assert forecast.score_cash_flow_stability([])[0] == 70
+
+
+def test_rent_ceases_adds_back_rent():
+    tx = statement(salary=90000, start_balance=20000)
+    ba = bank.analyze(tx, POLICY)
+    assert ba.avg_monthly_rent == pytest.approx(28417.0, rel=0.01)
+    base = forecast.assess(ba, tx, 40000.0, POLICY)
+    moved = forecast.assess(ba, tx, 40000.0, POLICY, rent_ceases=True)
+    assert moved.monthly_surplus_after_emi == pytest.approx(base.monthly_surplus_after_emi + ba.avg_monthly_rent, abs=1)
+    assert moved.prob_shortfall <= base.prob_shortfall
+    assert "rent" in moved.basis

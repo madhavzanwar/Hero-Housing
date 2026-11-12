@@ -159,7 +159,11 @@ def run(form: ApplicationForm, bundle: DocumentBundle, policy: Policy) -> list[R
 
     # valuation variance
     valuation = float(prop.get("market_value") or 0)
-    agreement = float(prop.get("consideration_value") or 0) or float(form.property_value)
+    # LAP: the deed's consideration is the historic purchase price, so compare the declared current value
+    if form.product == Product.LAP:
+        agreement = float(form.property_value)
+    else:
+        agreement = float(prop.get("consideration_value") or 0) or float(form.property_value)
     var_ref = float(policy.get("ltv.valuation_variance_refer", 0.15))
     if valuation > 0 and agreement > 0:
         var = abs(agreement - valuation) / max(agreement, valuation)

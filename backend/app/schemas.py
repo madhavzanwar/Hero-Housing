@@ -209,6 +209,7 @@ class BankAnalytics(BaseModel):
     round_number_share: float = 0     # share of txns that are exact multiples of Rs 1,000
     duplicate_txn_share: float = 0    # share of txns repeated verbatim (date, desc, amount, balance)
     latest_balance: float = 0
+    avg_monthly_rent: float = 0       # rent debits per month (stop after a self-occupied home purchase)
 
 
 class TenureOption(BaseModel):
