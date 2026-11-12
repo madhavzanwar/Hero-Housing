@@ -345,6 +345,77 @@ class AuditEvent(BaseModel):
     hash: str = ""      # sha256 chain: hash(prev_hash + this event json)
 
 
+# --------------------------------------------------------------------------- external data sources
+class DataSourceResult(BaseModel):
+    """One call to an external data source (bureau, KYC registry, AA, CERSAI, sanctions, ...)."""
+    # stable id: CIBIL_BUREAU, NSDL_PAN, UIDAI_OKYC, ACCOUNT_AGGREGATOR, CERSAI, SANCTIONS_UN, GSTN_MCA, CIRCLE_RATE
+    source: str
+    provider: str               # human name, e.g. "TransUnion CIBIL (sandbox mock)"
+    kind: Literal["BUREAU", "KYC", "BANKING", "REGISTRY", "SCREENING", "EMPLOYMENT", "PROPERTY"]
+    status: Literal["OK", "NO_MATCH", "HIT", "ERROR", "SKIPPED"]
+    mode: Literal["LIVE", "SANDBOX_MOCK", "OFFLINE_DATASET"]
+    latency_ms: int = 0
+    consent_id: str | None = None   # consent artefact id (AA / bureau pull), DPDP purpose-bound
+    request_ref: str = ""
+    summary: str = ""
+    data: dict[str, Any] = Field(default_factory=dict)   # masked payload only
+    fetched_at: datetime | None = None
+
+
+# --------------------------------------------------------------------------- property assessment
+class PropertyCheck(BaseModel):
+    check: str          # TITLE_CHAIN, ENCUMBRANCE_CERSAI, RERA, APPROVED_PLAN, OC_CC, TWO_VALUATIONS, ...
+    status: Literal["PASS", "WARN", "FAIL", "INFO"]
+    detail: str
+
+
+class PropertyAssessment(BaseModel):
+    address: str = ""
+    city: str = ""
+    locality: str = ""
+    property_type: str = "RESIDENTIAL"
+    area_sqft: float = 0
+    age_years: float | None = None
+    declared_value: float = 0             # application form
+    agreement_value: float | None = None  # sale deed / agreement consideration
+    valuation_report_value: float | None = None
+    valuation_reports: int = 0
+    circle_rate_per_sqft: float | None = None   # government guideline rate
+    circle_value: float | None = None
+    avm_value: float = 0                  # model estimate (point)
+    avm_low: float = 0                    # calibrated interval (e.g. 80%)
+    avm_high: float = 0
+    avm_rate_per_sqft: float = 0
+    interval_coverage: float = 0.8
+    confidence: float = 0                 # 0..1
+    reliability: Literal["HIGH", "MEDIUM", "LOW"] = "LOW"
+    route: Literal["AUTO", "DESKTOP_REVIEW", "SITE_INSPECTION"] = "SITE_INSPECTION"
+    # comparables: {address, area_sqft, price, rate_per_sqft, distance_km, months_ago}
+    comparables: list[dict[str, Any]] = Field(default_factory=list)
+    drivers: list[dict[str, Any]] = Field(default_factory=list)       # {factor, impact_inr, text}
+    value_for_ltv: float = 0              # conservative value used for LTV
+    value_basis: str = ""                 # e.g. "min(agreement, valuation, AVM low)"
+    checks: list[PropertyCheck] = Field(default_factory=list)
+    notes: list[str] = Field(default_factory=list)
+    model_version: str = ""
+
+
+# --------------------------------------------------------------------------- governance
+class Governance(BaseModel):
+    policy_version: str = ""
+    policy_hash: str = ""          # sha256 of the policy YAML used
+    model_version: str = ""
+    input_hash: str = ""           # sha256 of canonical inputs (form + document hashes + source payloads)
+    decision_hash: str = ""        # sha256 of canonical decision; replay must reproduce it
+    challenger: dict[str, Any] = Field(default_factory=dict)  # {model, pd, grade, agrees, note} shadow model
+    stp: bool = False              # straight-through (humanless) decision
+    stp_reason: str = ""
+    queue: str | None = None       # refer queue: CREDIT, FRAUD_RISK, COMPLIANCE_KYC, PROPERTY_LEGAL
+    sla_due_at: datetime | None = None
+    four_eyes_required: bool = False
+    replayable: bool = True
+
+
 class ApplicantProfile(BaseModel):
     name: str
     dob: date | None = None
@@ -392,6 +463,9 @@ class CaseDetail(BaseModel):
     audit: list[AuditEvent] = Field(default_factory=list)
     memo_markdown: str = ""
     copilot_trace: list[dict[str, Any]] = Field(default_factory=list)  # LangGraph node trace
+    data_sources: list[DataSourceResult] = Field(default_factory=list)
+    property: PropertyAssessment | None = None
+    governance: Governance | None = None
     disclaimer: str = (
         "Decision support for underwriters. Final credit decisions follow the lender's "
         "board-approved credit policy and applicable RBI/NHB regulations."
