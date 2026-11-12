@@ -1,0 +1,3 @@
+# Optional OCR for scanned images (PaddleOCR models via ONNX). The system degrades gracefully without it.
+rapidocr-onnxruntime==1.2.3
+onnxruntime==1.31.1

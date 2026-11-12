@@ -1,0 +1,29 @@
+# FinPilot HomeLoan backend — core runtime (Python 3.12+)
+fastapi==0.162.5
+starlette==1.10.0
+uvicorn[standard]==0.54.0
+pydantic==2.14.3
+python-multipart==0.0.33
+httpx==0.28.1
+PyYAML==6.0.3
+python-dateutil==4.0.0
+# agent orchestration
+langgraph==1.2.20
+langchain-core==1.8.0
+# documents (PDF text layer, images, synthetic persona generation)
+pypdf==7.0.1
+pillow==13.0.0
+reportlab==5.1.0
+RapidFuzz==3.14.6
+# analytics / ML
+numpy==2.5.4
+pandas==3.1.1
+scipy==1.18.1
+scikit-learn==1.9.1
+lightgbm==4.7.0
+shap==0.54.1
+joblib==1.6.0
+fairlearn==0.15.0
+matplotlib==3.11.2
+# optional OCR for scanned documents (PaddleOCR models on ONNX Runtime); API boots without it
+rapidocr-onnxruntime==1.2.3
