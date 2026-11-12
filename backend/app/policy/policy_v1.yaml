@@ -1,0 +1,210 @@
+# FinPilot HomeLoan — underwriting policy (machine-readable, versioned)
+# Every threshold the engine uses lives here. Rule IDs are cited in decisions,
+# the audit trail, the credit memo and Copilot answers.
+# NOTE: Illustrative policy for a hackathon prototype. Regulatory caps are
+# taken from public RBI directions (cited per rule); internal-policy values
+# (FOIR bands, rate grid, LAP LTV) are typical Indian HFC practice, not
+# Hero Housing Finance's actual policy.
+
+version: "2026.11-v1"
+effective_from: "2026-11-01"
+owner: "Credit Policy (demo)"
+currency: INR
+
+references:
+  RBI_HF_MC: "RBI Master Circular - Housing Finance (DOR.CRE.REC.No.06/08.12.001/2023-24 and updates), para 2.3.1 - LTV for individual housing loans"
+  RBI_RW_2020: "RBI circular DOR.BP.BC.No.24/21.06.001/2020-21 (16-Oct-2020) - Individual Housing Loans: Rationalisation of Risk Weights (LTV <=30L 90%, 30-75L 80%, >75L 75%)"
+  RBI_HFC_MD: "RBI Master Direction - Non-Banking Financial Company - Housing Finance Company (Reserve Bank) Directions, 2021 (as consolidated in HFC Directions 2025) - LTV caps for HFC housing loans"
+  RBI_KYC_MD: "RBI Master Direction - Know Your Customer (KYC) Direction, 2016 (updated) - CDD, OVDs, PAN/Form 60, PEP due diligence, UNSC/UAPA list screening"
+  RBI_FPC: "RBI Fair Practices Code for HFCs/NBFCs - written reasons for rejection, sanction letter with all-in cost, Key Facts Statement"
+  RBI_KFS: "RBI circular DOR.STR.REC.13/13.03.00/2024-25 (15-Apr-2024) - Key Facts Statement for loans & advances"
+  RBI_FLOAT: "RBI circular DOR.MCS.REC.32/01.01.003/2023-24 (18-Aug-2023) - Reset of floating interest rate on EMI based personal loans (tenure/EMI choice, switch to fixed)"
+  RBI_PREPAY: "RBI directions - no foreclosure/prepayment charges on floating-rate term loans to individuals for non-business purposes"
+  CERSAI: "SARFAESI Act 2002 s.20-26 / CERSAI central registry - search for prior security interest before creating mortgage"
+  PMLA: "Prevention of Money-Laundering Act 2002 & Rules - CTR/STR obligations; cash transaction monitoring"
+  DPDP: "Digital Personal Data Protection Act 2023 & DPDP Rules 2025 - purpose limitation, data minimisation (Aadhaar masked to last 4 digits per UIDAI/Aadhaar Act s.29)"
+  RBI_AI: "RBI FREE-AI framework (Aug-2025) - explainability, human oversight and audit of AI models in lending"
+
+pricing:
+  repo_rate: 0.055
+  base_rate_home_loan: 0.0835      # floating, repo-linked
+  base_rate_lap: 0.0975
+  grade_spread:                     # added to base rate by risk grade
+    A: 0.0
+    B: 0.0025
+    C: 0.0060
+    D: 0.0110
+    E: 0.0175
+  self_employed_spread: 0.0025
+  processing_fee_pct: 0.005
+
+eligibility:
+  min_age: 21
+  max_age_at_maturity:
+    SALARIED: 60          # retirement age
+    SELF_EMPLOYED: 70
+  max_tenure_months:
+    HOME_LOAN: 360
+    LAP: 180
+  min_tenure_months: 60
+  min_bureau_score: 650
+  refer_bureau_score: 700      # 650-699 -> refer
+  min_monthly_income:
+    SALARIED: 25000
+    SELF_EMPLOYED: 30000
+  min_years_in_job:
+    SALARIED: 1
+    SELF_EMPLOYED: 3          # business vintage
+  # FOIR cap by monthly assessed income band (fixed obligations incl. proposed EMI / net income)
+  foir_bands:
+    - { id: ELG-FOIR-01, max_income: 50000,   cap: 0.50 }
+    - { id: ELG-FOIR-02, max_income: 100000,  cap: 0.55 }
+    - { id: ELG-FOIR-03, max_income: 200000,  cap: 0.60 }
+    - { id: ELG-FOIR-04, max_income: null,    cap: 0.65 }
+  foir_refer_margin: 0.05       # FOIR within cap+5pp -> approve-with-conditions / refer
+  self_employed_income_haircut: 0.10   # use 90% of ITR-assessed income
+  co_applicant_income_weight: 1.0
+  income_assessment: "minimum of declared income, average net pay on salary slips and average salary credit in bank statement (salaried); ITR income/12 vs bank-credit income (self-employed)"
+
+ltv:
+  HOME_LOAN:
+    # Regulatory caps — RBI_RW_2020 / RBI_HF_MC / RBI_HFC_MD
+    - { id: LTV-HL-01, max_loan: 3000000,  cap: 0.90, ref: RBI_RW_2020 }
+    - { id: LTV-HL-02, max_loan: 7500000,  cap: 0.80, ref: RBI_RW_2020 }
+    - { id: LTV-HL-03, max_loan: null,     cap: 0.75, ref: RBI_RW_2020 }
+  LAP:
+    # Internal policy (no RBI regulatory LTV for LAP; prudent HFC practice)
+    RESIDENTIAL: { id: LTV-LAP-01, cap: 0.65 }
+    COMMERCIAL:  { id: LTV-LAP-02, cap: 0.55 }
+    PLOT:        { id: LTV-LAP-03, cap: 0.50 }
+  property_value_basis: "lower of agreement value and technical valuation (excl. stamp duty/registration for properties above Rs 10 lakh)"
+  valuation_variance_refer: 0.15   # agreement vs valuation diff >15% -> refer
+
+lap:
+  allowed_end_uses: ["Business expansion", "Working capital", "Education", "Medical", "Marriage", "Debt consolidation", "Home renovation"]
+  prohibited_end_uses: ["Speculation", "Purchase of land for speculation", "Capital market investment", "Gold/bullion", "Chit funds", "Crypto assets"]
+  max_loan: 50000000
+
+banking:
+  min_months_statement: 6
+  max_bounces_6m: 2              # >2 inward/outward cheque or NACH bounces -> refer; >=4 decline
+  decline_bounces_6m: 4
+  min_avg_balance_to_emi: 1.0    # AMB should cover at least one proposed EMI
+  cash_deposit_spike_multiple: 3.0   # single cash deposit > 3x median monthly credit
+  cash_deposit_share_refer: 0.30     # cash deposits >30% of credits -> refer (PMLA)
+  salary_regularity_min: 0.80
+  high_risk_merchant_keywords: ["dream11", "bet", "casino", "rummy", "poker", "lottery", "crypto", "binance", "wazirx", "teen patti", "1xbet", "stake"]
+  high_risk_share_refer: 0.05    # >5% of debits to high-risk merchants -> refer
+
+fraud:
+  income_inflation_tolerance: 0.15     # declared vs evidenced income >15% -> flag
+  income_inflation_decline: 0.40       # >40% -> decline (misrepresentation)
+  name_match_threshold: 0.85
+  round_number_share: 0.6              # >60% round-thousand txns in statement -> tamper heuristic
+  suspicious_pdf_producers: ["photoshop", "gimp", "canva", "ilovepdf", "smallpdf", "pdf editor", "sejda", "foxit phantompdf"]
+  negative_list_file: "negative_list.yaml"
+
+risk:
+  model: "lightgbm-pd-v1"
+  pd_bands:                 # calibrated PD -> grade / suggested action
+    - { grade: A, max_pd: 0.02, band: Low,       action: APPROVE }
+    - { grade: B, max_pd: 0.05, band: Moderate,  action: APPROVE }
+    - { grade: C, max_pd: 0.10, band: Elevated,  action: APPROVE_WITH_CONDITIONS }
+    - { grade: D, max_pd: 0.20, band: High,      action: REFER }
+    - { grade: E, max_pd: 1.00, band: Very high, action: DECLINE }
+  # Hybrid: policy rules ALWAYS dominate the model. A hard-rule DECLINE cannot be
+  # overturned by a low PD; a model DECLINE (grade E) on an otherwise clean file becomes REFER
+  # so a human decides (RBI_AI: human oversight).
+  model_decline_becomes_refer: true
+
+capacity:
+  monte_carlo_iterations: 1000
+  horizon_months: 24
+  rate_shock_bps: 200
+  income_shock_pct: 0.15
+  max_prob_shortfall: 0.20        # >20% chance buffer goes negative -> condition/refer
+  refer_prob_shortfall: 0.40      # >40% -> refer
+  min_stress_coverage: 1.0        # stressed surplus should cover the stressed EMI
+  health_weights:                 # FinPilot 5-pillar health score weights
+    cash_flow: 0.30
+    debt_pressure: 0.25
+    savings: 0.20
+    emergency_fund: 0.15
+    spending_consistency: 0.10
+
+kyc:
+  required_documents:
+    SALARIED: [PAN, AADHAAR, SALARY_SLIP, BANK_STATEMENT, FORM16, SALE_DEED, VALUATION_REPORT]
+    SELF_EMPLOYED: [PAN, AADHAAR, ITR, BANK_STATEMENT, SALE_DEED, VALUATION_REPORT]
+  min_salary_slips: 3
+  aadhaar_storage: "masked-last-4"
+  pep_enhanced_due_diligence: true
+
+decision:
+  auto_approve_max_amount: 20000000   # above Rs 2 Cr always goes to a human
+  sanction_validity_days: 90
+  conditions_catalogue:
+    ADD_CO_APPLICANT: "Add an earning co-applicant to bring FOIR within policy"
+    REDUCE_AMOUNT: "Reduce loan amount to the maximum eligible amount"
+    INCREASE_TENURE: "Increase tenure to bring EMI within FOIR (subject to age at maturity)"
+    SUBMIT_DOC: "Submit missing / clearer documents"
+    CLEAR_EMI: "Close or reduce existing obligations before disbursal"
+    LEGAL_TITLE: "Legal & technical clearance of title and CERSAI search before disbursal"
+    END_USE_DECLARATION: "End-use declaration and utilisation certificate (LAP)"
+    REDUCE_TENURE: "Tenure restricted so that the loan matures before the maximum age at maturity"
+    RISK_PRICING: "Risk-based pricing at the grade spread with NACH mandate from the salary / main operating account"
+    EMI_RESERVE: "Maintain a lien-marked reserve equal to 3 EMIs or route income to the NACH account"
+    SOURCE_OF_FUNDS: "Explain and evidence the source of large cash deposits (PMLA)"
+  min_reduced_share: 0.50      # if max eligible < 50% of requested, the offer is not meaningful -> decline
+  amount_rounding: 10000       # reduced / sanctioned amounts rounded down to Rs 10,000
+  tenure_options: [120, 180, 240, 300, 360]
+
+# --------------------------------------------------------------------------- rule catalogue
+# Every RuleHit.rule_id the engine emits is listed here with its display name,
+# category and regulatory / policy reference key (see `references`).
+rules:
+  ELG-AGE-01:   { name: "Minimum applicant age", category: ELIGIBILITY, ref: RBI_FPC }
+  ELG-TEN-01:   { name: "Maximum tenure (product limit and age at maturity)", category: ELIGIBILITY, ref: RBI_FLOAT }
+  ELG-INC-01:   { name: "Minimum assessed monthly income", category: ELIGIBILITY, ref: RBI_FPC }
+  ELG-VIN-01:   { name: "Employment / business vintage", category: ELIGIBILITY, ref: RBI_FPC }
+  ELG-BUR-01:   { name: "Credit bureau score", category: ELIGIBILITY, ref: RBI_FPC }
+  ELG-FOIR-01:  { name: "FOIR cap (income up to Rs 50,000)", category: ELIGIBILITY, ref: RBI_FPC }
+  ELG-FOIR-02:  { name: "FOIR cap (income Rs 50,001 - 1,00,000)", category: ELIGIBILITY, ref: RBI_FPC }
+  ELG-FOIR-03:  { name: "FOIR cap (income Rs 1,00,001 - 2,00,000)", category: ELIGIBILITY, ref: RBI_FPC }
+  ELG-FOIR-04:  { name: "FOIR cap (income above Rs 2,00,000)", category: ELIGIBILITY, ref: RBI_FPC }
+  LTV-HL-01:    { name: "LTV cap 90% (home loan up to Rs 30 lakh)", category: ELIGIBILITY, ref: RBI_RW_2020 }
+  LTV-HL-02:    { name: "LTV cap 80% (home loan Rs 30-75 lakh)", category: ELIGIBILITY, ref: RBI_RW_2020 }
+  LTV-HL-03:    { name: "LTV cap 75% (home loan above Rs 75 lakh)", category: ELIGIBILITY, ref: RBI_RW_2020 }
+  LTV-LAP-01:   { name: "LTV cap LAP - residential property", category: ELIGIBILITY, ref: null }
+  LTV-LAP-02:   { name: "LTV cap LAP - commercial property", category: ELIGIBILITY, ref: null }
+  LTV-LAP-03:   { name: "LTV cap LAP - plot", category: ELIGIBILITY, ref: null }
+  ELG-LAP-01:   { name: "LAP maximum loan amount", category: ELIGIBILITY, ref: null }
+  BNK-STMT-01:  { name: "Bank statement coverage", category: BANKING, ref: RBI_KYC_MD }
+  BNK-BNC-01:   { name: "Cheque / NACH bounces", category: BANKING, ref: RBI_FPC }
+  BNK-AMB-01:   { name: "Average monthly balance vs proposed EMI", category: BANKING, ref: RBI_FPC }
+  BNK-SAL-01:   { name: "Salary credit regularity", category: BANKING, ref: RBI_FPC }
+  BNK-EMI-01:   { name: "Undisclosed obligations in bank statement", category: BANKING, ref: RBI_FPC }
+  FRD-NEG-01:   { name: "Negative list / PEP / sanctions screening", category: FRAUD, ref: RBI_KYC_MD }
+  FRD-INC-01:   { name: "Income inflation (declared vs evidenced)", category: FRAUD, ref: RBI_FPC }
+  FRD-DOC-01:   { name: "Document tampering / consistency flag", category: FRAUD, ref: RBI_KYC_MD }
+  FRD-DOC-02:   { name: "Document produced with editing software", category: FRAUD, ref: RBI_KYC_MD }
+  FRD-RND-01:   { name: "Round-number transaction pattern", category: FRAUD, ref: RBI_KYC_MD }
+  FRD-DUP-01:   { name: "Duplicate bank statements", category: FRAUD, ref: RBI_KYC_MD }
+  FRD-CASH-01:  { name: "Large cash deposit spikes", category: FRAUD, ref: PMLA }
+  FRD-CASH-02:  { name: "Share of cash deposits in credits", category: FRAUD, ref: PMLA }
+  FRD-HRM-01:   { name: "High-risk merchants (gambling / betting / crypto)", category: FRAUD, ref: PMLA }
+  KYC-DOC-01:   { name: "Required documents (KYC & income)", category: KYC, ref: RBI_KYC_MD }
+  KYC-PAN-01:   { name: "PAN available and verified", category: KYC, ref: RBI_KYC_MD }
+  KYC-AAD-01:   { name: "Aadhaar stored masked (last 4 digits)", category: KYC, ref: DPDP }
+  KYC-XCHK-01:  { name: "Cross-document consistency", category: KYC, ref: RBI_KYC_MD }
+  CMP-CERSAI-01: { name: "CERSAI / encumbrance search", category: COMPLIANCE, ref: CERSAI }
+  CMP-LAP-01:   { name: "LAP end use permitted", category: COMPLIANCE, ref: RBI_FPC }
+  CMP-LEGAL-01: { name: "Property title documents", category: COMPLIANCE, ref: CERSAI }
+  CMP-VAL-01:   { name: "Agreement value vs technical valuation", category: COMPLIANCE, ref: RBI_HF_MC }
+  CMP-KFS-01:   { name: "Key Facts Statement with APR", category: COMPLIANCE, ref: RBI_KFS }
+  CMP-FPC-01:   { name: "Fair Practices Code disclosures", category: COMPLIANCE, ref: RBI_FPC }
+  CMP-PREPAY-01: { name: "No foreclosure charges on floating-rate loans", category: COMPLIANCE, ref: RBI_PREPAY }
+  RSK-PD-01:    { name: "ML probability of default (risk grade)", category: RISK, ref: RBI_AI }
+  CAP-MC-01:    { name: "Monte Carlo repayment buffer", category: CAPACITY, ref: RBI_AI }
+  CAP-STR-01:   { name: "Stress test (+200 bps, -15% income)", category: CAPACITY, ref: RBI_FLOAT }
+  DEC-AMT-01:   { name: "Auto-approval amount limit", category: RISK, ref: RBI_AI }
