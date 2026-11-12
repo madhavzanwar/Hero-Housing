@@ -14,7 +14,7 @@
     "sanctioned": 4500000.0,
     "flags": 0,
     "rules_failed": [],
-    "ms": 11624
+    "ms": 2106
   },
   {
     "id": "p02",
@@ -31,7 +31,7 @@
     "sanctioned": 2200000.0,
     "flags": 0,
     "rules_failed": [],
-    "ms": 4440
+    "ms": 298
   },
   {
     "id": "p03",
@@ -48,7 +48,7 @@
     "sanctioned": 11000000.0,
     "flags": 0,
     "rules_failed": [],
-    "ms": 11123
+    "ms": 695
   },
   {
     "id": "p04",
@@ -66,7 +66,7 @@
     "sanctioned": 3500000.0,
     "flags": 0,
     "rules_failed": [],
-    "ms": 14740
+    "ms": 714
   },
   {
     "id": "p05",
@@ -85,7 +85,7 @@
     "rules_failed": [
       "ELG-FOIR-03"
     ],
-    "ms": 15194
+    "ms": 318
   },
   {
     "id": "p06",
@@ -105,7 +105,7 @@
       "ELG-FOIR-02",
       "CAP-MC-01"
     ],
-    "ms": 21397
+    "ms": 298
   },
   {
     "id": "p07",
@@ -139,7 +139,7 @@
       "FRD-DOC-01",
       "FRD-INC-01"
     ],
-    "ms": 15539
+    "ms": 398
   },
   {
     "id": "p08",
@@ -161,7 +161,7 @@
       "RSK-PD-01",
       "CAP-MC-01"
     ],
-    "ms": 23027
+    "ms": 337
   },
   {
     "id": "p09",
@@ -178,7 +178,7 @@
     "sanctioned": 8000000.0,
     "flags": 0,
     "rules_failed": [],
-    "ms": 28498
+    "ms": 843
   },
   {
     "id": "p10",
@@ -198,7 +198,7 @@
     "rules_failed": [
       "CMP-LAP-01"
     ],
-    "ms": 19990
+    "ms": 810
   },
   {
     "id": "p11",
@@ -215,7 +215,7 @@
     "sanctioned": 15000000.0,
     "flags": 0,
     "rules_failed": [],
-    "ms": 8680
+    "ms": 435
   },
   {
     "id": "p12",
@@ -234,6 +234,6 @@
     "rules_failed": [
       "LTV-HL-01"
     ],
-    "ms": 17202
+    "ms": 357
   }
 ]

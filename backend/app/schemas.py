@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from datetime import date, datetime
 from enum import Enum
-from typing import Any, Literal, Optional
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -92,24 +92,24 @@ class ApplicationForm(BaseModel):
     """What the RM / applicant declares at intake (before documents are read)."""
     product: Product = Product.HOME_LOAN
     applicant_name: str
-    dob: Optional[date] = None
-    gender: Optional[Literal["M", "F", "O"]] = None
-    mobile_masked: Optional[str] = None
-    city: Optional[str] = None
+    dob: date | None = None
+    gender: Literal["M", "F", "O"] | None = None
+    mobile_masked: str | None = None
+    city: str | None = None
     employment_type: EmploymentType = EmploymentType.SALARIED
-    employer_or_business: Optional[str] = None
+    employer_or_business: str | None = None
     years_in_job: float = 3.0
     declared_monthly_income: float  # net take-home (salaried) or avg monthly net (SE)
     existing_emi: float = 0.0
-    bureau_score: Optional[int] = None  # CIBIL-like score from bureau pull (synthetic)
+    bureau_score: int | None = None  # CIBIL-like score from bureau pull (synthetic)
     loan_amount: float
     tenure_months: int = 240
     property_value: float
     property_type: Literal["RESIDENTIAL", "COMMERCIAL", "PLOT"] = "RESIDENTIAL"
-    property_city: Optional[str] = None
+    property_city: str | None = None
     purpose: str = "Purchase of residential flat"
-    lap_end_use: Optional[str] = None  # LAP only: business expansion, education, ...
-    co_applicant: Optional[CoApplicant] = None
+    lap_end_use: str | None = None  # LAP only: business expansion, education, ...
+    co_applicant: CoApplicant | None = None
     is_first_home: bool = True
     rate_type: Literal["FLOATING", "FIXED"] = "FLOATING"
 
@@ -119,8 +119,8 @@ class Transaction(BaseModel):
     date: date
     description: str
     amount: float  # +credit / -debit
-    balance: Optional[float] = None
-    category: Optional[str] = None  # SALARY, EMI, CASH_DEPOSIT, BOUNCE, GAMBLING, ...
+    balance: float | None = None
+    category: str | None = None  # SALARY, EMI, CASH_DEPOSIT, BOUNCE, GAMBLING, ...
 
 
 class ExtractedField(BaseModel):
@@ -135,7 +135,7 @@ class Flag(BaseModel):
     title: str
     detail: str
     severity: Severity = Severity.MEDIUM
-    document_id: Optional[str] = None
+    document_id: str | None = None
     evidence: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -175,7 +175,7 @@ class DocumentBundle(BaseModel):
     salary_slips: list[dict[str, Any]] = Field(default_factory=list)  # {month, gross, net, employer}
     identity: dict[str, Any] = Field(default_factory=dict)   # name, dob, pan_masked, aadhaar_masked, address
     income_docs: dict[str, Any] = Field(default_factory=dict)  # form16/itr: annual_income, employer, ay
-    property: dict[str, Any] = Field(default_factory=dict)   # address, market_value, distress_value, area_sqft, owner, registration_no, encumbrance
+    property: dict[str, Any] = Field(default_factory=dict)   # address, market_value, area_sqft, owner, encumbrance, ...
     cross_checks: list[CrossCheck] = Field(default_factory=list)
     flags: list[Flag] = Field(default_factory=list)          # forgery / tampering / consistency flags
     missing_documents: list[DocType] = Field(default_factory=list)
@@ -300,7 +300,7 @@ class RuleHit(BaseModel):
     detail: str
     effect: Literal["NONE", "CONDITION", "REFER", "DECLINE", "REDUCE_AMOUNT"] = "NONE"
     severity: Severity = Severity.INFO
-    reference: Optional[str] = None   # regulatory citation, e.g. "RBI Master Circular DOR.CRE.REC.No.06/08.12.001/2023-24 para 2.3.1"
+    reference: str | None = None   # regulatory citation, e.g. "RBI HFC Directions 2025 para 58"
     evidence: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -333,7 +333,7 @@ class Override(BaseModel):
     from_outcome: DecisionOutcome
     to_outcome: DecisionOutcome
     reason: str
-    sanctioned_amount: Optional[float] = None
+    sanctioned_amount: float | None = None
 
 
 class AuditEvent(BaseModel):
@@ -347,15 +347,15 @@ class AuditEvent(BaseModel):
 
 class ApplicantProfile(BaseModel):
     name: str
-    dob: Optional[date] = None
+    dob: date | None = None
     age: float = 0
-    gender: Optional[str] = None
-    pan_masked: Optional[str] = None
-    aadhaar_masked: Optional[str] = None
-    address: Optional[str] = None
-    city: Optional[str] = None
+    gender: str | None = None
+    pan_masked: str | None = None
+    aadhaar_masked: str | None = None
+    address: str | None = None
+    city: str | None = None
     employment_type: EmploymentType
-    employer_or_business: Optional[str] = None
+    employer_or_business: str | None = None
 
 
 class CaseSummary(BaseModel):
@@ -365,19 +365,19 @@ class CaseSummary(BaseModel):
     loan_amount: float
     property_value: float
     status: CaseStatus
-    outcome: Optional[DecisionOutcome] = None
-    pd: Optional[float] = None
-    grade: Optional[str] = None
+    outcome: DecisionOutcome | None = None
+    pd: float | None = None
+    grade: str | None = None
     flags: int = 0
     created_at: datetime
     turnaround_ms: int = 0
-    persona_id: Optional[str] = None
-    segment: Optional[str] = None
+    persona_id: str | None = None
+    segment: str | None = None
 
 
 class CaseDetail(BaseModel):
     id: str
-    persona_id: Optional[str] = None
+    persona_id: str | None = None
     created_at: datetime
     status: CaseStatus
     form: ApplicationForm
@@ -416,7 +416,7 @@ class OverrideRequest(BaseModel):
     underwriter: str
     to_outcome: DecisionOutcome
     reason: str = Field(min_length=5)
-    sanctioned_amount: Optional[float] = None
+    sanctioned_amount: float | None = None
 
 
 class CopilotRequest(BaseModel):
