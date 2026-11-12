@@ -1,0 +1,459 @@
+{
+ "model_version": "lightgbm-pd-v1+5593a32d",
+ "trained_at": "2026-11-12T11:00:18Z",
+ "algorithm": "LightGBM gradient-boosted trees (monotone constraints) + Platt calibration",
+ "params": {
+  "objective": "binary",
+  "learning_rate": 0.02,
+  "num_leaves": 7,
+  "min_data_in_leaf": 150,
+  "feature_fraction": 0.85,
+  "bagging_fraction": 0.85,
+  "bagging_freq": 1,
+  "lambda_l2": 2.0,
+  "seed": 42,
+  "deterministic": true,
+  "force_row_wise": true
+ },
+ "best_iteration": 435,
+ "monotone_constraints": {
+  "bureau_score": -1,
+  "foir": 1,
+  "ltv": 1,
+  "monthly_income": -1,
+  "loan_to_income": 1,
+  "existing_emi_to_income": 1,
+  "bounces_6m": 1,
+  "amb_to_emi": -1,
+  "income_regularity": -1,
+  "cash_deposit_share": 1,
+  "high_risk_spend_share": 1,
+  "years_in_job": -1,
+  "age": 0,
+  "tenure_months": 0,
+  "is_self_employed": 1,
+  "is_lap": 1,
+  "has_co_applicant": -1,
+  "city_tier": 1
+ },
+ "features": [
+  "bureau_score",
+  "foir",
+  "ltv",
+  "monthly_income",
+  "loan_to_income",
+  "existing_emi_to_income",
+  "bounces_6m",
+  "amb_to_emi",
+  "income_regularity",
+  "cash_deposit_share",
+  "high_risk_spend_share",
+  "years_in_job",
+  "age",
+  "tenure_months",
+  "is_self_employed",
+  "is_lap",
+  "has_co_applicant",
+  "city_tier"
+ ],
+ "feature_labels": {
+  "bureau_score": "Credit bureau score",
+  "foir": "Fixed obligations to income ratio (FOIR)",
+  "ltv": "Loan to property value (LTV)",
+  "monthly_income": "Assessed monthly income",
+  "loan_to_income": "Loan amount vs annual income",
+  "existing_emi_to_income": "Existing EMIs as share of income",
+  "bounces_6m": "Cheque/NACH bounces in last 6 months",
+  "amb_to_emi": "Average monthly balance vs proposed EMI",
+  "income_regularity": "Regularity of income credits",
+  "cash_deposit_share": "Cash deposits as share of credits",
+  "high_risk_spend_share": "Spend on betting/crypto merchants",
+  "years_in_job": "Years in current job / business",
+  "age": "Applicant age",
+  "tenure_months": "Loan tenure",
+  "is_self_employed": "Self-employed applicant",
+  "is_lap": "Loan against property (vs home loan)",
+  "has_co_applicant": "Earning co-applicant",
+  "city_tier": "City tier"
+ },
+ "data": {
+  "kind": "SYNTHETIC",
+  "generator": "backend/app/ml/synthetic.py (documented generative process)",
+  "rows": 60000,
+  "seed": 42,
+  "default_rate": 0.0395,
+  "splits": {
+   "train": 30600,
+   "early_stopping": 5400,
+   "calibration": 12000,
+   "test": 12000
+  }
+ },
+ "test": {
+  "auc": 0.8338,
+  "gini": 0.6676,
+  "ks": 0.5344,
+  "brier": 0.03273,
+  "log_loss": 0.13062,
+  "default_rate": 0.0395,
+  "mean_pd": 0.0398,
+  "n": 12000,
+  "ece": 0.00291
+ },
+ "test_uncalibrated": {
+  "brier": 0.03273,
+  "ece": 0.00345
+ },
+ "test_isotonic": {
+  "brier": 0.03275,
+  "ece": 0.00528,
+  "auc": 0.8324
+ },
+ "baselines": {
+  "logistic_regression_auc": 0.8383,
+  "fallback_scorecard": {
+   "auc": 0.8397,
+   "brier": 0.03222,
+   "mean_pd": 0.0405
+  },
+  "oracle_true_pd_auc": 0.8634,
+  "note": "oracle = AUC of the generator's own true PD (ceiling given unobserved noise)"
+ },
+ "calibration": {
+  "method": "platt",
+  "a": 0.977244,
+  "b": -0.076985,
+  "deciles": [
+   {
+    "decile": 1,
+    "n": 1200,
+    "mean_pd": 0.00191,
+    "observed_default_rate": 0.00333,
+    "min_pd": 0.00062,
+    "max_pd": 0.00294
+   },
+   {
+    "decile": 2,
+    "n": 1200,
+    "mean_pd": 0.00416,
+    "observed_default_rate": 0.00583,
+    "min_pd": 0.00294,
+    "max_pd": 0.00539
+   },
+   {
+    "decile": 3,
+    "n": 1200,
+    "mean_pd": 0.00673,
+    "observed_default_rate": 0.00667,
+    "min_pd": 0.0054,
+    "max_pd": 0.00813
+   },
+   {
+    "decile": 4,
+    "n": 1200,
+    "mean_pd": 0.00969,
+    "observed_default_rate": 0.01083,
+    "min_pd": 0.00813,
+    "max_pd": 0.0114
+   },
+   {
+    "decile": 5,
+    "n": 1200,
+    "mean_pd": 0.01343,
+    "observed_default_rate": 0.02,
+    "min_pd": 0.0114,
+    "max_pd": 0.01563
+   },
+   {
+    "decile": 6,
+    "n": 1200,
+    "mean_pd": 0.01852,
+    "observed_default_rate": 0.01667,
+    "min_pd": 0.01563,
+    "max_pd": 0.02186
+   },
+   {
+    "decile": 7,
+    "n": 1200,
+    "mean_pd": 0.02653,
+    "observed_default_rate": 0.0225,
+    "min_pd": 0.02186,
+    "max_pd": 0.03186
+   },
+   {
+    "decile": 8,
+    "n": 1200,
+    "mean_pd": 0.04027,
+    "observed_default_rate": 0.03,
+    "min_pd": 0.03188,
+    "max_pd": 0.05078
+   },
+   {
+    "decile": 9,
+    "n": 1200,
+    "mean_pd": 0.06901,
+    "observed_default_rate": 0.06917,
+    "min_pd": 0.05078,
+    "max_pd": 0.09655
+   },
+   {
+    "decile": 10,
+    "n": 1200,
+    "mean_pd": 0.20805,
+    "observed_default_rate": 0.21,
+    "min_pd": 0.09671,
+    "max_pd": 0.82125
+   }
+  ]
+ },
+ "pd_bands": [
+  {
+   "grade": "A",
+   "band": "Low",
+   "pd_range": "0%-2%",
+   "share": 0.5743,
+   "n": 6892,
+   "observed_default_rate": 0.0106,
+   "mean_pd": 0.0085,
+   "policy_action": "APPROVE"
+  },
+  {
+   "grade": "B",
+   "band": "Moderate",
+   "pd_range": "2%-5%",
+   "share": 0.2225,
+   "n": 2670,
+   "observed_default_rate": 0.024,
+   "mean_pd": 0.0317,
+   "policy_action": "APPROVE"
+  },
+  {
+   "grade": "C",
+   "band": "Elevated",
+   "pd_range": "5%-10%",
+   "share": 0.1087,
+   "n": 1304,
+   "observed_default_rate": 0.0698,
+   "mean_pd": 0.0699,
+   "policy_action": "APPROVE_WITH_CONDITIONS"
+  },
+  {
+   "grade": "D",
+   "band": "High",
+   "pd_range": "10%-20%",
+   "share": 0.0578,
+   "n": 693,
+   "observed_default_rate": 0.14,
+   "mean_pd": 0.1394,
+   "policy_action": "REFER"
+  },
+  {
+   "grade": "E",
+   "band": "Very high",
+   "pd_range": "20%-100%",
+   "share": 0.0367,
+   "n": 441,
+   "observed_default_rate": 0.3379,
+   "mean_pd": 0.3324,
+   "policy_action": "DECLINE"
+  }
+ ],
+ "shap_importance": [
+  {
+   "feature": "bureau_score",
+   "label": "Credit bureau score",
+   "mean_abs_shap": 0.7554
+  },
+  {
+   "feature": "foir",
+   "label": "Fixed obligations to income ratio (FOIR)",
+   "mean_abs_shap": 0.2657
+  },
+  {
+   "feature": "ltv",
+   "label": "Loan to property value (LTV)",
+   "mean_abs_shap": 0.2616
+  },
+  {
+   "feature": "income_regularity",
+   "label": "Regularity of income credits",
+   "mean_abs_shap": 0.2336
+  },
+  {
+   "feature": "amb_to_emi",
+   "label": "Average monthly balance vs proposed EMI",
+   "mean_abs_shap": 0.1988
+  },
+  {
+   "feature": "monthly_income",
+   "label": "Assessed monthly income",
+   "mean_abs_shap": 0.1396
+  },
+  {
+   "feature": "cash_deposit_share",
+   "label": "Cash deposits as share of credits",
+   "mean_abs_shap": 0.1387
+  },
+  {
+   "feature": "years_in_job",
+   "label": "Years in current job / business",
+   "mean_abs_shap": 0.0804
+  },
+  {
+   "feature": "has_co_applicant",
+   "label": "Earning co-applicant",
+   "mean_abs_shap": 0.0748
+  },
+  {
+   "feature": "existing_emi_to_income",
+   "label": "Existing EMIs as share of income",
+   "mean_abs_shap": 0.0613
+  },
+  {
+   "feature": "age",
+   "label": "Applicant age",
+   "mean_abs_shap": 0.0576
+  },
+  {
+   "feature": "bounces_6m",
+   "label": "Cheque/NACH bounces in last 6 months",
+   "mean_abs_shap": 0.049
+  },
+  {
+   "feature": "high_risk_spend_share",
+   "label": "Spend on betting/crypto merchants",
+   "mean_abs_shap": 0.0421
+  },
+  {
+   "feature": "loan_to_income",
+   "label": "Loan amount vs annual income",
+   "mean_abs_shap": 0.042
+  },
+  {
+   "feature": "tenure_months",
+   "label": "Loan tenure",
+   "mean_abs_shap": 0.0128
+  },
+  {
+   "feature": "city_tier",
+   "label": "City tier",
+   "mean_abs_shap": 0.0047
+  },
+  {
+   "feature": "is_self_employed",
+   "label": "Self-employed applicant",
+   "mean_abs_shap": 0.0037
+  },
+  {
+   "feature": "is_lap",
+   "label": "Loan against property (vs home loan)",
+   "mean_abs_shap": 0.0006
+  }
+ ],
+ "fairness": {
+  "approve_rule": "model-only approve if calibrated PD < 5% (grades A-B)",
+  "framing": "positive label = good borrower (no default); TPR = approval rate among good borrowers (equal opportunity), FPR = approval rate among borrowers who defaulted",
+  "gender": {
+   "by_group": {
+    "F": {
+     "n": 3380,
+     "selection_rate": 0.8047,
+     "tpr": 0.8228,
+     "fpr": 0.2832,
+     "observed_default_rate": 0.0334,
+     "mean_pd": 0.0394,
+     "auc": 0.8455
+    },
+    "M": {
+     "n": 8620,
+     "selection_rate": 0.7937,
+     "tpr": 0.8157,
+     "fpr": 0.2909,
+     "observed_default_rate": 0.0419,
+     "mean_pd": 0.04,
+     "auc": 0.8302
+    }
+   },
+   "demographic_parity_difference": 0.011,
+   "demographic_parity_ratio": 0.9863,
+   "equalized_odds_difference": 0.0077
+  },
+  "age_band": {
+   "by_group": {
+    "30-45": {
+     "n": 7654,
+     "selection_rate": 0.8043,
+     "tpr": 0.8242,
+     "fpr": 0.3224,
+     "observed_default_rate": 0.0397,
+     "mean_pd": 0.0385,
+     "auc": 0.8284
+    },
+    "45+": {
+     "n": 2483,
+     "selection_rate": 0.7761,
+     "tpr": 0.8003,
+     "fpr": 0.2477,
+     "observed_default_rate": 0.0439,
+     "mean_pd": 0.0429,
+     "auc": 0.8389
+    },
+    "<30": {
+     "n": 1863,
+     "selection_rate": 0.7939,
+     "tpr": 0.8141,
+     "fpr": 0.1967,
+     "observed_default_rate": 0.0327,
+     "mean_pd": 0.0412,
+     "auc": 0.8539
+    }
+   },
+   "demographic_parity_difference": 0.0282,
+   "demographic_parity_ratio": 0.9649,
+   "equalized_odds_difference": 0.1256
+  }
+ },
+ "benchmark": {
+  "uci_taiwan_credit_card_default": {
+   "auc": 0.778,
+   "gini": 0.5561,
+   "ks": 0.4268,
+   "brier": 0.13532,
+   "log_loss": 0.43084,
+   "default_rate": 0.2212,
+   "mean_pd": 0.2235,
+   "n": 6000,
+   "n_total": 30000,
+   "best_iteration": 258,
+   "logistic_baseline_auc": 0.7087,
+   "fairness_sex": {
+    "approve_rule": "approve lowest-PD 80% of test applicants",
+    "selection_rate": {
+     "female": 0.8102,
+     "male": 0.7848
+    },
+    "demographic_parity_difference": 0.0254,
+    "equalized_odds_difference": 0.0201
+   },
+   "source": "OpenML 42477 = UCI 'default of credit card clients' (Taiwan, 2005; Yeh & Lien 2009)",
+   "target": "default payment next month",
+   "note": "Credit-card data, not mortgages: benchmarks the method only. Literature AUC on this set is typically 0.77-0.79."
+  },
+  "german_credit_g": {
+   "source": "OpenML 31 = Statlog German credit (UCI, Hofmann 1994)",
+   "n_total": 1000,
+   "default_rate": 0.3,
+   "cv": "5-fold stratified, 200 rounds, uncalibrated",
+   "auc_mean": 0.7902,
+   "auc_std": 0.0283,
+   "ks_mean": 0.4838,
+   "note": "Small (1,000 rows); literature AUC typically 0.75-0.80."
+  }
+ },
+ "plots": [
+  "docs/img/model_roc.png",
+  "docs/img/model_calibration.png",
+  "docs/img/model_shap_importance.png",
+  "docs/img/model_fairness.png"
+ ]
+}
