@@ -1,0 +1,29 @@
+# One-command run:  docker compose up --build
+#   UI  -> http://localhost:8080   (nginx serving the Vite build, /api proxied)
+#   API -> http://localhost:8000/docs
+# Optional local LLM for the Underwriting Copilot: docker compose --profile llm up
+# (then `docker compose exec ollama ollama pull llama3.2:3b`). Works fine without it.
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DEMO_MODE: "1"
+      ALLOWED_ORIGINS: "*"
+      OLLAMA_HOST: "http://ollama:11434"
+      GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
+    ports:
+      - "8000:8000"
+  web:
+    build:
+      context: frontend
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["llm"]
+    ports:
+      - "11434:11434"

@@ -1,0 +1,16 @@
+# Render Blueprint (free tier): New > Blueprint > pick this repo.
+services:
+  - type: web
+    name: finpilot-homeloan-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: DEMO_MODE
+        value: "1"
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: GEMINI_API_KEY
+        sync: false
