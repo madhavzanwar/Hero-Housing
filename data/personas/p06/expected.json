@@ -1,0 +1,155 @@
+{
+  "persona_id": "p06",
+  "expected_outcome": "REFER",
+  "acceptable_outcomes": [
+    "REFER"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "SRINIVAS GOUD PALLAPU",
+        "dob": "1987-07-29",
+        "pan_masked": "XXXXX5521L",
+        "father_name": "NARSIMHA GOUD PALLAPU"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Srinivas Goud Pallapu",
+        "dob": "1987-07-29",
+        "aadhaar_masked": "XXXX XXXX 7412",
+        "gender": "M",
+        "pincode": "500045"
+      }
+    },
+    "salary_slip_2026-08.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-08",
+        "employer": "Deccan Freightlines Pvt Ltd",
+        "employee_name": "Srinivas Goud Pallapu",
+        "gross": 65767.0,
+        "net_pay": 62016.0,
+        "total_deductions": 3751.0
+      }
+    },
+    "salary_slip_2026-09.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-09",
+        "employer": "Deccan Freightlines Pvt Ltd",
+        "employee_name": "Srinivas Goud Pallapu",
+        "gross": 65767.0,
+        "net_pay": 62016.0,
+        "total_deductions": 3751.0
+      }
+    },
+    "salary_slip_2026-10.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-10",
+        "employer": "Deccan Freightlines Pvt Ltd",
+        "employee_name": "Srinivas Goud Pallapu",
+        "gross": 65767.0,
+        "net_pay": 62016.0,
+        "total_deductions": 3751.0
+      }
+    },
+    "form16_ay2026-27.png": {
+      "doc_type": "FORM16",
+      "source": "ocr",
+      "fields": {
+        "employer": "Deccan Freightlines Pvt Ltd",
+        "ay": "2026-27",
+        "gross_salary": 733960.0,
+        "taxable_income": 656560.0,
+        "tax": 0.0,
+        "employee_name": "SRINIVAS GOUD PALLAPU"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "SRINIVAS GOUD PALLAPU",
+        "bank_name": "Charminar Mercantile Bank",
+        "n_transactions": 153,
+        "opening_balance": 24000,
+        "closing_balance": 70013.58,
+        "period_start": "2026-05-01",
+        "period_end": "2026-10-31",
+        "total_credits": 379103.63,
+        "total_debits": 333090.05,
+        "salary_credits": 6,
+        "bounces": 3,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 6
+      }
+    },
+    "sale_deed.pdf": {
+      "doc_type": "SALE_DEED",
+      "source": "text",
+      "fields": {
+        "property_address": "Flat No. 207, Sai Residency, Kukatpally Housing Board Colony, Hyderabad 500072",
+        "consideration_value": 4200000.0,
+        "registration_no": "KKP-3/7841/2026",
+        "area_sqft": 1060.0,
+        "deed_type": "SALE_DEED",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.pdf": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "text",
+      "fields": {
+        "market_value": 4300000.0,
+        "distress_value": 3440000.0,
+        "realisable_value": 3870000.0,
+        "area_sqft": 1060.0,
+        "property_address": "Flat No. 207, Sai Residency, Kukatpally Housing Board Colony, Hyderabad 500072"
+      }
+    }
+  },
+  "facts": {
+    "name": "SRINIVAS GOUD PALLAPU",
+    "form_name": "Srinivas Goud Pallapu",
+    "dob": "1987-07-29",
+    "pan_masked": "XXXXX5521L",
+    "aadhaar_masked": "XXXX XXXX 7412",
+    "employment_type": "SALARIED",
+    "employer": "Deccan Freightlines Pvt Ltd",
+    "actual_net_salary": 62016.0,
+    "slip_net_pay": 62016.0,
+    "declared_monthly_income": 62000.0,
+    "form16": {
+      "employer": "Deccan Freightlines Pvt Ltd",
+      "ay": "2026-27",
+      "gross_salary": 733960.0,
+      "taxable_income": 656560.0,
+      "tax": 0.0,
+      "employee_name": "SRINIVAS GOUD PALLAPU"
+    },
+    "itr": null,
+    "property_market_value": 4300000.0,
+    "property_distress_value": 3440000.0,
+    "consideration_value": 4200000.0,
+    "registration_no": "KKP-3/7841/2026",
+    "statement_months": 6,
+    "salary_credits": 6,
+    "bounces": 3,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 6
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [],
+  "missing_documents": []
+}

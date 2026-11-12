@@ -1,0 +1,31 @@
+{
+  "product": "HOME_LOAN",
+  "applicant_name": "Karthik Nair",
+  "dob": "1990-12-03",
+  "gender": "M",
+  "mobile_masked": "XXXXXX1133",
+  "city": "Bengaluru",
+  "employment_type": "SALARIED",
+  "employer_or_business": "Bluepeak Software Solutions Pvt Ltd",
+  "years_in_job": 5.5,
+  "declared_monthly_income": 110000.0,
+  "existing_emi": 32700,
+  "bureau_score": 741,
+  "loan_amount": 6000000,
+  "tenure_months": 240,
+  "property_value": 8500000,
+  "property_type": "RESIDENTIAL",
+  "property_city": "Bengaluru",
+  "purpose": "Purchase of residential flat",
+  "lap_end_use": null,
+  "co_applicant": null,
+  "is_first_home": true,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p05",
+    "title": "Salaried with heavy existing EMIs (FOIR breach), Bengaluru",
+    "segment": "Salaried - Prime",
+    "story": "Karthik, 35, product manager. Already pays a car loan and a personal loan EMI; adding a Rs 60 lakh home loan pushes FOIR far above the 60% cap -> reduce amount / add co-applicant / close a loan.",
+    "expected_outcome": "APPROVE_WITH_CONDITIONS"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "product": "HOME_LOAN",
+  "applicant_name": "Rohan Mehta",
+  "dob": "1983-09-05",
+  "gender": "M",
+  "mobile_masked": "XXXXXX3410",
+  "city": "Mumbai",
+  "employment_type": "SELF_EMPLOYED",
+  "employer_or_business": "R V Mehta & Associates, Chartered Accountants",
+  "years_in_job": 14,
+  "declared_monthly_income": 360000.0,
+  "existing_emi": 0.0,
+  "bureau_score": 801,
+  "loan_amount": 11000000,
+  "tenure_months": 240,
+  "property_value": 16000000,
+  "property_type": "RESIDENTIAL",
+  "property_city": "Mumbai",
+  "purpose": "Purchase of residential flat",
+  "lap_end_use": null,
+  "co_applicant": null,
+  "is_first_home": true,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p03",
+    "title": "Self-employed Chartered Accountant, Mumbai",
+    "segment": "Self-employed Professional",
+    "story": "Rohan, 43, runs his own CA practice for 14 years. Rs 1.1 Cr home loan on a Rs 1.6 Cr flat in Andheri (LTV 68.75%, under the 75% slab for loans above Rs 75 lakh). Two years of ITRs, steady client receipts.",
+    "expected_outcome": "APPROVE"
+  }
+}

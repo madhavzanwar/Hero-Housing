@@ -1,0 +1,158 @@
+{
+  "persona_id": "p01",
+  "expected_outcome": "APPROVE",
+  "acceptable_outcomes": [
+    "APPROVE"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "AARAV SUNIL DESHMUKH",
+        "dob": "1994-06-18",
+        "pan_masked": "XXXXX4821K",
+        "father_name": "SUNIL DESHMUKH"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Aarav Sunil Deshmukh",
+        "dob": "1994-06-18",
+        "aadhaar_masked": "XXXX XXXX 5524",
+        "gender": "M",
+        "pincode": "411038"
+      }
+    },
+    "salary_slip_2026-08.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-08",
+        "employer": "Acme Infotech Pvt Ltd",
+        "employee_name": "Aarav Sunil Deshmukh",
+        "gross": 173217.0,
+        "net_pay": 145012.0,
+        "total_deductions": 28205.0
+      }
+    },
+    "salary_slip_2026-09.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-09",
+        "employer": "Acme Infotech Pvt Ltd",
+        "employee_name": "Aarav Sunil Deshmukh",
+        "gross": 173217.0,
+        "net_pay": 145012.0,
+        "total_deductions": 28205.0
+      }
+    },
+    "salary_slip_2026-10.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-10",
+        "employer": "Acme Infotech Pvt Ltd",
+        "employee_name": "Aarav Sunil Deshmukh",
+        "gross": 173217.0,
+        "net_pay": 145012.0,
+        "total_deductions": 28205.0
+      }
+    },
+    "form16_ay2026-27.pdf": {
+      "doc_type": "FORM16",
+      "source": "text",
+      "fields": {
+        "employer": "Acme Infotech Pvt Ltd",
+        "ay": "2026-27",
+        "gross_salary": 1933102.0,
+        "taxable_income": 1855702.0,
+        "tax": 177986.0,
+        "employee_name": "AARAV SUNIL DESHMUKH"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "AARAV SUNIL DESHMUKH",
+        "bank_name": "Sahyadri Co-operative Bank",
+        "n_transactions": 166,
+        "opening_balance": 310000,
+        "closing_balance": 615516.72,
+        "period_start": "2026-05-01",
+        "period_end": "2026-10-31",
+        "total_credits": 885748.38,
+        "total_debits": 580231.66,
+        "salary_credits": 6,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 0
+      }
+    },
+    "agreement_for_sale.pdf": {
+      "doc_type": "SALE_DEED",
+      "source": "text",
+      "fields": {
+        "property_address": "Flat No. 702, 7th Floor, B Wing, Sahyadri Heights, Survey No. 45/2, Baner, Pune 411045",
+        "consideration_value": 6200000.0,
+        "registration_no": "HVL-2/5821/2026",
+        "area_sqft": 980.0,
+        "deed_type": "AGREEMENT_FOR_SALE",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.png": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "ocr",
+      "fields": {
+        "market_value": 6450000.0,
+        "distress_value": 5160000.0,
+        "realisable_value": 5805000.0,
+        "area_sqft": 980.0,
+        "property_address": "Flat No. 702, 7th Floor, B Wing, Sahyadri Heights, Survey No. 45/2, Baner, Pune 411045"
+      }
+    }
+  },
+  "facts": {
+    "name": "AARAV SUNIL DESHMUKH",
+    "form_name": "Aarav Deshmukh",
+    "dob": "1994-06-18",
+    "pan_masked": "XXXXX4821K",
+    "aadhaar_masked": "XXXX XXXX 5524",
+    "employment_type": "SALARIED",
+    "employer": "Acme Infotech Pvt Ltd",
+    "actual_net_salary": 145012.0,
+    "slip_net_pay": 145012.0,
+    "declared_monthly_income": 145000.0,
+    "form16": {
+      "employer": "Acme Infotech Pvt Ltd",
+      "ay": "2026-27",
+      "gross_salary": 1933102.0,
+      "taxable_income": 1855702.0,
+      "tax": 177986.0,
+      "employee_name": "AARAV SUNIL DESHMUKH"
+    },
+    "itr": null,
+    "property_market_value": 6450000.0,
+    "property_distress_value": 5160000.0,
+    "consideration_value": 6200000.0,
+    "registration_no": "HVL-2/5821/2026",
+    "statement_months": 6,
+    "salary_credits": 6,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 0
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [
+    "HIGH",
+    "CRITICAL"
+  ],
+  "missing_documents": []
+}

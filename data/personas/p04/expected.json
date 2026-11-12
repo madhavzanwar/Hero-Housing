@@ -1,0 +1,142 @@
+{
+  "persona_id": "p04",
+  "expected_outcome": "APPROVE_WITH_CONDITIONS",
+  "acceptable_outcomes": [
+    "APPROVE_WITH_CONDITIONS",
+    "REFER"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "RAMESH KUMAR AGRAWAL",
+        "dob": "1975-01-22",
+        "pan_masked": "XXXXX7741H",
+        "father_name": "GOPAL DAS AGRAWAL"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Ramesh Kumar Agrawal",
+        "dob": "1975-01-22",
+        "aadhaar_masked": "XXXX XXXX 6382",
+        "gender": "M",
+        "pincode": "452002"
+      }
+    },
+    "itr_v_ay2025-26.png": {
+      "doc_type": "ITR",
+      "source": "ocr",
+      "fields": {
+        "ay": "2025-26",
+        "total_income": 1228000.0,
+        "gross_total_income": 1378000.0,
+        "form": "ITR-4",
+        "tax_paid": 66768.0,
+        "name": "RAMESH KUMAR AGRAWAL"
+      }
+    },
+    "itr_v_ay2026-27.pdf": {
+      "doc_type": "ITR",
+      "source": "text",
+      "fields": {
+        "ay": "2026-27",
+        "total_income": 1404000.0,
+        "gross_total_income": 1554000.0,
+        "form": "ITR-4",
+        "tax_paid": 94224.0,
+        "name": "RAMESH KUMAR AGRAWAL"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "RAMESH KUMAR AGRAWAL",
+        "bank_name": "Malwa Commerce Bank",
+        "n_transactions": 411,
+        "opening_balance": 265000,
+        "closing_balance": 259614.05,
+        "period_start": "2025-11-01",
+        "period_end": "2026-10-31",
+        "total_credits": 2336606.9,
+        "total_debits": 2341992.85,
+        "salary_credits": 0,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 26,
+        "emi_debits": 0
+      }
+    },
+    "title_deed.pdf": {
+      "doc_type": "SALE_DEED",
+      "source": "text",
+      "fields": {
+        "property_address": "House No. 42, Malharganj Main Road, Ward 18, Indore 452002 (G+2, shop on ground floor)",
+        "consideration_value": 1850000.0,
+        "registration_no": "IND-1/2214/2009",
+        "area_sqft": 1850.0,
+        "deed_type": "TITLE_DEED",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.pdf": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "text",
+      "fields": {
+        "market_value": 7000000.0,
+        "distress_value": 5600000.0,
+        "realisable_value": 6300000.0,
+        "area_sqft": 1850.0,
+        "property_address": "House No. 42, Malharganj Main Road, Ward 18, Indore 452002 (G+2, shop on ground floor)"
+      }
+    }
+  },
+  "facts": {
+    "name": "RAMESH KUMAR AGRAWAL",
+    "form_name": "Ramesh Kumar Agrawal",
+    "dob": "1975-01-22",
+    "pan_masked": "XXXXX7741H",
+    "aadhaar_masked": "XXXX XXXX 6382",
+    "employment_type": "SELF_EMPLOYED",
+    "employer": "Shree Ganesh Kirana & General Stores",
+    "actual_net_salary": 0.0,
+    "slip_net_pay": null,
+    "declared_monthly_income": 105000.0,
+    "form16": null,
+    "itr": [
+      {
+        "ay": "2025-26",
+        "total_income": 1228000.0,
+        "gross_total_income": 1378000.0,
+        "form": "ITR-4",
+        "tax_paid": 66768.0,
+        "name": "RAMESH KUMAR AGRAWAL"
+      },
+      {
+        "ay": "2026-27",
+        "total_income": 1404000.0,
+        "gross_total_income": 1554000.0,
+        "form": "ITR-4",
+        "tax_paid": 94224.0,
+        "name": "RAMESH KUMAR AGRAWAL"
+      }
+    ],
+    "property_market_value": 7000000.0,
+    "property_distress_value": 5600000.0,
+    "consideration_value": 1850000.0,
+    "registration_no": "IND-1/2214/2009",
+    "statement_months": 12,
+    "salary_credits": 0,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 26,
+    "emi_debits": 0
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [],
+  "missing_documents": []
+}

@@ -1,0 +1,158 @@
+{
+  "persona_id": "p02",
+  "expected_outcome": "APPROVE",
+  "acceptable_outcomes": [
+    "APPROVE"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "SUNITA RAJESH WANKHEDE",
+        "dob": "1984-02-11",
+        "pan_masked": "XXXXX6157M",
+        "father_name": "DATTATRAYA BHONDE"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Sunita Rajesh Wankhede",
+        "dob": "1984-02-11",
+        "aadhaar_masked": "XXXX XXXX 8837",
+        "gender": "F",
+        "pincode": "440015"
+      }
+    },
+    "salary_slip_2026-08.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-08",
+        "employer": "Vidarbha Shikshan Prasarak Mandal (Govt. Aided)",
+        "employee_name": "Sunita Rajesh Wankhede",
+        "gross": 57503.0,
+        "net_pay": 52015.0,
+        "total_deductions": 5488.0
+      }
+    },
+    "salary_slip_2026-09.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-09",
+        "employer": "Vidarbha Shikshan Prasarak Mandal (Govt. Aided)",
+        "employee_name": "Sunita Rajesh Wankhede",
+        "gross": 57503.0,
+        "net_pay": 52015.0,
+        "total_deductions": 5488.0
+      }
+    },
+    "salary_slip_2026-10.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-10",
+        "employer": "Vidarbha Shikshan Prasarak Mandal (Govt. Aided)",
+        "employee_name": "Sunita Rajesh Wankhede",
+        "gross": 57503.0,
+        "net_pay": 52015.0,
+        "total_deductions": 5488.0
+      }
+    },
+    "form16_ay2026-27.pdf": {
+      "doc_type": "FORM16",
+      "source": "text",
+      "fields": {
+        "employer": "Vidarbha Shikshan Prasarak Mandal (Govt. Aided)",
+        "ay": "2026-27",
+        "gross_salary": 641733.0,
+        "taxable_income": 564333.0,
+        "tax": 0.0,
+        "employee_name": "SUNITA RAJESH WANKHEDE"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "SUNITA RAJESH WANKHEDE",
+        "bank_name": "Vidarbha Trust Bank",
+        "n_transactions": 132,
+        "opening_balance": 148000,
+        "closing_balance": 294511.7,
+        "period_start": "2026-05-01",
+        "period_end": "2026-10-31",
+        "total_credits": 322817.81,
+        "total_debits": 176306.11,
+        "salary_credits": 6,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 0
+      }
+    },
+    "agreement_for_sale.png": {
+      "doc_type": "SALE_DEED",
+      "source": "ocr",
+      "fields": {
+        "property_address": "Flat No. 304, 3rd Floor, Gurukrupa Apartments, Mouza Somalwada, Wardha Road, Nagpur 440025",
+        "consideration_value": 2600000.0,
+        "registration_no": "NGP-4/3317/2026",
+        "area_sqft": 820.0,
+        "deed_type": "AGREEMENT_FOR_SALE",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.pdf": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "text",
+      "fields": {
+        "market_value": 2680000.0,
+        "distress_value": 2144000.0,
+        "realisable_value": 2412000.0,
+        "area_sqft": 820.0,
+        "property_address": "Flat No. 304, 3rd Floor, Gurukrupa Apartments, Mouza Somalwada, Wardha Road, Nagpur 440025"
+      }
+    }
+  },
+  "facts": {
+    "name": "SUNITA RAJESH WANKHEDE",
+    "form_name": "Sunita Wankhede",
+    "dob": "1984-02-11",
+    "pan_masked": "XXXXX6157M",
+    "aadhaar_masked": "XXXX XXXX 8837",
+    "employment_type": "SALARIED",
+    "employer": "Vidarbha Shikshan Prasarak Mandal (Govt. Aided)",
+    "actual_net_salary": 52015.0,
+    "slip_net_pay": 52015.0,
+    "declared_monthly_income": 52000.0,
+    "form16": {
+      "employer": "Vidarbha Shikshan Prasarak Mandal (Govt. Aided)",
+      "ay": "2026-27",
+      "gross_salary": 641733.0,
+      "taxable_income": 564333.0,
+      "tax": 0.0,
+      "employee_name": "SUNITA RAJESH WANKHEDE"
+    },
+    "itr": null,
+    "property_market_value": 2680000.0,
+    "property_distress_value": 2144000.0,
+    "consideration_value": 2600000.0,
+    "registration_no": "NGP-4/3317/2026",
+    "statement_months": 6,
+    "salary_credits": 6,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 0
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [
+    "HIGH",
+    "CRITICAL"
+  ],
+  "missing_documents": []
+}

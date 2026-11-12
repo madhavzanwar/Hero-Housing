@@ -1,0 +1,155 @@
+{
+  "persona_id": "p08",
+  "expected_outcome": "DECLINE",
+  "acceptable_outcomes": [
+    "DECLINE"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "PRAKASH CHAND JOSHI",
+        "dob": "1972-05-10",
+        "pan_masked": "XXXXX1176R",
+        "father_name": "RAM CHAND JOSHI"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Prakash Chand Joshi",
+        "dob": "1972-05-10",
+        "aadhaar_masked": "XXXX XXXX 7481",
+        "gender": "M",
+        "pincode": "302016"
+      }
+    },
+    "salary_slip_2026-08.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-08",
+        "employer": "Rajputana Spinning Mills Ltd",
+        "employee_name": "Prakash Chand Joshi",
+        "gross": 40186.0,
+        "net_pay": 38016.0,
+        "total_deductions": 2170.0
+      }
+    },
+    "salary_slip_2026-09.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-09",
+        "employer": "Rajputana Spinning Mills Ltd",
+        "employee_name": "Prakash Chand Joshi",
+        "gross": 40186.0,
+        "net_pay": 38016.0,
+        "total_deductions": 2170.0
+      }
+    },
+    "salary_slip_2026-10.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-10",
+        "employer": "Rajputana Spinning Mills Ltd",
+        "employee_name": "Prakash Chand Joshi",
+        "gross": 40186.0,
+        "net_pay": 38016.0,
+        "total_deductions": 2170.0
+      }
+    },
+    "form16_ay2026-27.pdf": {
+      "doc_type": "FORM16",
+      "source": "text",
+      "fields": {
+        "employer": "Rajputana Spinning Mills Ltd",
+        "ay": "2026-27",
+        "gross_salary": 448476.0,
+        "taxable_income": 373476.0,
+        "tax": 0.0,
+        "employee_name": "PRAKASH CHAND JOSHI"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "PRAKASH CHAND JOSHI",
+        "bank_name": "Marudhar Rural Bank",
+        "n_transactions": 134,
+        "opening_balance": 41000,
+        "closing_balance": 50998.71,
+        "period_start": "2026-05-01",
+        "period_end": "2026-10-31",
+        "total_credits": 233401.21,
+        "total_debits": 223402.5,
+        "salary_credits": 6,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 0
+      }
+    },
+    "sale_deed.png": {
+      "doc_type": "SALE_DEED",
+      "source": "ocr",
+      "fields": {
+        "property_address": "Flat No. G-3, Ganpati Enclave, Jhotwara Road, Jaipur 302012",
+        "consideration_value": 3000000.0,
+        "registration_no": "JPR-2/4410/2026",
+        "area_sqft": 760.0,
+        "deed_type": "SALE_DEED",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.pdf": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "text",
+      "fields": {
+        "market_value": 3050000.0,
+        "distress_value": 2440000.0,
+        "realisable_value": 2745000.0,
+        "area_sqft": 760.0,
+        "property_address": "Flat No. G-3, Ganpati Enclave, Jhotwara Road, Jaipur 302012"
+      }
+    }
+  },
+  "facts": {
+    "name": "PRAKASH CHAND JOSHI",
+    "form_name": "Prakash Chand Joshi",
+    "dob": "1972-05-10",
+    "pan_masked": "XXXXX1176R",
+    "aadhaar_masked": "XXXX XXXX 7481",
+    "employment_type": "SALARIED",
+    "employer": "Rajputana Spinning Mills Ltd",
+    "actual_net_salary": 38016.0,
+    "slip_net_pay": 38016.0,
+    "declared_monthly_income": 38000.0,
+    "form16": {
+      "employer": "Rajputana Spinning Mills Ltd",
+      "ay": "2026-27",
+      "gross_salary": 448476.0,
+      "taxable_income": 373476.0,
+      "tax": 0.0,
+      "employee_name": "PRAKASH CHAND JOSHI"
+    },
+    "itr": null,
+    "property_market_value": 3050000.0,
+    "property_distress_value": 2440000.0,
+    "consideration_value": 3000000.0,
+    "registration_no": "JPR-2/4410/2026",
+    "statement_months": 6,
+    "salary_credits": 6,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 0
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [],
+  "missing_documents": []
+}

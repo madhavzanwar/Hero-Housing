@@ -1,0 +1,31 @@
+{
+  "product": "LAP",
+  "applicant_name": "Gaurav Malhotra",
+  "dob": "1985-11-19",
+  "gender": "M",
+  "mobile_masked": "XXXXXX6621",
+  "city": "New Delhi",
+  "employment_type": "SELF_EMPLOYED",
+  "employer_or_business": "Malhotra Auto Spares",
+  "years_in_job": 12,
+  "declared_monthly_income": 140000.0,
+  "existing_emi": 0.0,
+  "bureau_score": 724,
+  "loan_amount": 4000000,
+  "tenure_months": 180,
+  "property_value": 7500000,
+  "property_type": "RESIDENTIAL",
+  "property_city": "New Delhi",
+  "purpose": "Loan against property",
+  "lap_end_use": "Capital market investment",
+  "co_applicant": null,
+  "is_first_home": false,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p10",
+    "title": "LAP for stock-market investment + gambling spends, Delhi",
+    "segment": "Self-employed Business - LAP",
+    "story": "Gaurav, 40, auto-parts trader, wants LAP for 'capital market investment' - a prohibited end use. His statement shows frequent Dream11 / rummy / betting app debits.",
+    "expected_outcome": "DECLINE"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "persona_id": "p07",
+  "expected_outcome": "DECLINE",
+  "acceptable_outcomes": [
+    "DECLINE"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "NIKHIL ANAND VERMA",
+        "dob": "1991-04-16",
+        "pan_masked": "XXXXX9034D",
+        "father_name": "ANAND PRAKASH VERMA"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Nikhil Anand Verma",
+        "dob": "1991-04-16",
+        "aadhaar_masked": "XXXX XXXX 5509",
+        "gender": "M",
+        "pincode": "201309"
+      }
+    },
+    "salary_slip_2026-08.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-08",
+        "employer": "Zenith Retail Ventures Pvt Ltd",
+        "employee_name": "Nikhil Anand Verma",
+        "gross": 200000.0,
+        "net_pay": 180000.0,
+        "total_deductions": 4853.0
+      }
+    },
+    "salary_slip_2026-09.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-09",
+        "employer": "Zenith Retail Ventures Pvt Ltd",
+        "employee_name": "Nikhil Anand Verma",
+        "gross": 200000.0,
+        "net_pay": 180000.0,
+        "total_deductions": 4853.0
+      }
+    },
+    "salary_slip_2026-10.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-10",
+        "employer": "Zenith Retail Ventures Pvt Ltd",
+        "employee_name": "Nikhil Anand Verma",
+        "gross": 200000.0,
+        "net_pay": 180000.0,
+        "total_deductions": 4853.0
+      }
+    },
+    "form16_ay2026-27.pdf": {
+      "doc_type": "FORM16",
+      "source": "text",
+      "fields": {
+        "employer": "Zenith Retail Ventures Pvt Ltd",
+        "ay": "2026-27",
+        "gross_salary": 1002938.0,
+        "taxable_income": 927938.0,
+        "tax": 0.0,
+        "employee_name": "NIKHIL ANAND VERMA"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "NIKHIL ANAND VERMA",
+        "bank_name": "Yamuna Sahakari Bank",
+        "n_transactions": 150,
+        "opening_balance": 72000,
+        "closing_balance": 187788.46,
+        "period_start": "2026-05-01",
+        "period_end": "2026-10-31",
+        "total_credits": 513159.2,
+        "total_debits": 397370.74,
+        "salary_credits": 6,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 0
+      }
+    },
+    "sale_deed.pdf": {
+      "doc_type": "SALE_DEED",
+      "source": "text",
+      "fields": {
+        "property_address": "Flat No. 1503, Tower C, Skyline Residency, Sector 150, Noida 201310",
+        "consideration_value": 9500000.0,
+        "registration_no": "NDA-2/11893/2026",
+        "area_sqft": 1450.0,
+        "deed_type": "SALE_DEED",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.png": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "ocr",
+      "fields": {
+        "market_value": 9600000.0,
+        "distress_value": 7680000.0,
+        "realisable_value": 8640000.0,
+        "area_sqft": 1450.0,
+        "property_address": "Flat No. 1503, Tower C, Skyline Residency, Sector 150, Noida 201310"
+      }
+    }
+  },
+  "facts": {
+    "name": "NIKHIL ANAND VERMA",
+    "form_name": "Nikhil Verma",
+    "dob": "1991-04-16",
+    "pan_masked": "XXXXX9034D",
+    "aadhaar_masked": "XXXX XXXX 5509",
+    "employment_type": "SALARIED",
+    "employer": "Zenith Retail Ventures Pvt Ltd",
+    "actual_net_salary": 85016.0,
+    "slip_net_pay": 180000.0,
+    "declared_monthly_income": 180000.0,
+    "form16": {
+      "employer": "Zenith Retail Ventures Pvt Ltd",
+      "ay": "2026-27",
+      "gross_salary": 1002938.0,
+      "taxable_income": 927938.0,
+      "tax": 0.0,
+      "employee_name": "NIKHIL ANAND VERMA"
+    },
+    "itr": null,
+    "property_market_value": 9600000.0,
+    "property_distress_value": 7680000.0,
+    "consideration_value": 9500000.0,
+    "registration_no": "NDA-2/11893/2026",
+    "statement_months": 6,
+    "salary_credits": 6,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 0
+  },
+  "expected_flags": [
+    "DOC_PRODUCER_SUSPICIOUS",
+    "DOC_MODIFIED_AFTER_CREATION",
+    "DOC_FONT_ANOMALY",
+    "DOC_ROUND_NUMBERS",
+    "SALARY_CREDIT_MISMATCH"
+  ],
+  "forbidden_flag_severities": [],
+  "missing_documents": []
+}

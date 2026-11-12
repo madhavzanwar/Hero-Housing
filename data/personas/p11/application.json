@@ -1,0 +1,31 @@
+{
+  "product": "HOME_LOAN",
+  "applicant_name": "Vikram Rathore Singhania",
+  "dob": "1979-03-14",
+  "gender": "M",
+  "mobile_masked": "XXXXXX1187",
+  "city": "Mumbai",
+  "employment_type": "SALARIED",
+  "employer_or_business": "Westbridge Capital Advisors Pvt Ltd",
+  "years_in_job": 3.6,
+  "declared_monthly_income": 320000.0,
+  "existing_emi": 0.0,
+  "bureau_score": 788,
+  "loan_amount": 15000000,
+  "tenure_months": 240,
+  "property_value": 24000000,
+  "property_type": "RESIDENTIAL",
+  "property_city": "Mumbai",
+  "purpose": "Purchase of residential flat",
+  "lap_end_use": null,
+  "co_applicant": null,
+  "is_first_home": true,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p11",
+    "title": "Returning NRI - negative-list (PEP) name match, Mumbai",
+    "segment": "Salaried - EDD",
+    "story": "Vikram, 47, returned from Dubai to head advisory at a Mumbai firm. Financially strong, but his name matches a politically exposed person on the screening list -> enhanced due diligence by a human.",
+    "expected_outcome": "REFER"
+  }
+}

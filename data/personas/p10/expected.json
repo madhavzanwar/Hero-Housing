@@ -1,0 +1,142 @@
+{
+  "persona_id": "p10",
+  "expected_outcome": "DECLINE",
+  "acceptable_outcomes": [
+    "DECLINE",
+    "REFER"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "GAURAV MALHOTRA",
+        "dob": "1985-11-19",
+        "pan_masked": "XXXXX8812J",
+        "father_name": "SURINDER MALHOTRA"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Gaurav Malhotra",
+        "dob": "1985-11-19",
+        "aadhaar_masked": "XXXX XXXX 8743",
+        "gender": "M",
+        "pincode": "110027"
+      }
+    },
+    "itr_v_ay2025-26.pdf": {
+      "doc_type": "ITR",
+      "source": "text",
+      "fields": {
+        "ay": "2025-26",
+        "total_income": 1655000.0,
+        "gross_total_income": 1805000.0,
+        "form": "ITR-3",
+        "tax_paid": 136240.0,
+        "name": "GAURAV MALHOTRA"
+      }
+    },
+    "itr_v_ay2026-27.pdf": {
+      "doc_type": "ITR",
+      "source": "text",
+      "fields": {
+        "ay": "2026-27",
+        "total_income": 1802000.0,
+        "gross_total_income": 1952000.0,
+        "form": "ITR-3",
+        "tax_paid": 166816.0,
+        "name": "GAURAV MALHOTRA"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "GAURAV MALHOTRA",
+        "bank_name": "Indraprastha Sahakari Bank",
+        "n_transactions": 550,
+        "opening_balance": 420000,
+        "closing_balance": 34402.42,
+        "period_start": "2025-11-01",
+        "period_end": "2026-10-31",
+        "total_credits": 2413390.07,
+        "total_debits": 2798987.65,
+        "salary_credits": 0,
+        "bounces": 0,
+        "gambling_txns": 140,
+        "cash_deposits": 0,
+        "emi_debits": 0
+      }
+    },
+    "title_deed.png": {
+      "doc_type": "SALE_DEED",
+      "source": "ocr",
+      "fields": {
+        "property_address": "H-34, Second Floor, Rajouri Garden, New Delhi 110027",
+        "consideration_value": 3100000.0,
+        "registration_no": "DL-WEST/8812/2015",
+        "area_sqft": 1350.0,
+        "deed_type": "TITLE_DEED",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.pdf": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "text",
+      "fields": {
+        "market_value": 7500000.0,
+        "distress_value": 6000000.0,
+        "realisable_value": 6750000.0,
+        "area_sqft": 1350.0,
+        "property_address": "H-34, Second Floor, Rajouri Garden, New Delhi 110027"
+      }
+    }
+  },
+  "facts": {
+    "name": "GAURAV MALHOTRA",
+    "form_name": "Gaurav Malhotra",
+    "dob": "1985-11-19",
+    "pan_masked": "XXXXX8812J",
+    "aadhaar_masked": "XXXX XXXX 8743",
+    "employment_type": "SELF_EMPLOYED",
+    "employer": "Malhotra Auto Spares",
+    "actual_net_salary": 0.0,
+    "slip_net_pay": null,
+    "declared_monthly_income": 140000.0,
+    "form16": null,
+    "itr": [
+      {
+        "ay": "2025-26",
+        "total_income": 1655000.0,
+        "gross_total_income": 1805000.0,
+        "form": "ITR-3",
+        "tax_paid": 136240.0,
+        "name": "GAURAV MALHOTRA"
+      },
+      {
+        "ay": "2026-27",
+        "total_income": 1802000.0,
+        "gross_total_income": 1952000.0,
+        "form": "ITR-3",
+        "tax_paid": 166816.0,
+        "name": "GAURAV MALHOTRA"
+      }
+    ],
+    "property_market_value": 7500000.0,
+    "property_distress_value": 6000000.0,
+    "consideration_value": 3100000.0,
+    "registration_no": "DL-WEST/8812/2015",
+    "statement_months": 12,
+    "salary_credits": 0,
+    "bounces": 0,
+    "gambling_txns": 140,
+    "cash_deposits": 0,
+    "emi_debits": 0
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [],
+  "missing_documents": []
+}

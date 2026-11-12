@@ -1,0 +1,31 @@
+{
+  "product": "HOME_LOAN",
+  "applicant_name": "Srinivas Goud Pallapu",
+  "dob": "1987-07-29",
+  "gender": "M",
+  "mobile_masked": "XXXXXX7123",
+  "city": "Hyderabad",
+  "employment_type": "SALARIED",
+  "employer_or_business": "Deccan Freightlines Pvt Ltd",
+  "years_in_job": 7.8,
+  "declared_monthly_income": 62000.0,
+  "existing_emi": 6000,
+  "bureau_score": 680,
+  "loan_amount": 3200000,
+  "tenure_months": 240,
+  "property_value": 4200000,
+  "property_type": "RESIDENTIAL",
+  "property_city": "Hyderabad",
+  "purpose": "Purchase of residential flat",
+  "lap_end_use": null,
+  "co_applicant": null,
+  "is_first_home": true,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p06",
+    "title": "Borderline: bureau 680, NACH bounces, thin buffer, Hyderabad",
+    "segment": "Salaried - Near prime",
+    "story": "Srinivas, 39, operations executive at a logistics firm. Bureau 680, three EMI bounces in six months and a balance that hovers near zero before payday. Numbers just about work - an underwriter should decide.",
+    "expected_outcome": "REFER"
+  }
+}

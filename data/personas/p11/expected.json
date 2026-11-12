@@ -1,0 +1,155 @@
+{
+  "persona_id": "p11",
+  "expected_outcome": "REFER",
+  "acceptable_outcomes": [
+    "REFER"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "VIKRAM RATHORE SINGHANIA",
+        "dob": "1979-03-14",
+        "pan_masked": "XXXXX7319K",
+        "father_name": "DEVENDRA SINGHANIA"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Vikram Rathore Singhania",
+        "dob": "1979-03-14",
+        "aadhaar_masked": "XXXX XXXX 6615",
+        "gender": "M",
+        "pincode": "400018"
+      }
+    },
+    "salary_slip_2026-08.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-08",
+        "employer": "Westbridge Capital Advisors Pvt Ltd",
+        "employee_name": "Vikram Rathore Singhania",
+        "gross": 448219.0,
+        "net_pay": 320011.0,
+        "total_deductions": 128208.0
+      }
+    },
+    "salary_slip_2026-09.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-09",
+        "employer": "Westbridge Capital Advisors Pvt Ltd",
+        "employee_name": "Vikram Rathore Singhania",
+        "gross": 448219.0,
+        "net_pay": 320011.0,
+        "total_deductions": 128208.0
+      }
+    },
+    "salary_slip_2026-10.png": {
+      "doc_type": "SALARY_SLIP",
+      "source": "ocr",
+      "fields": {
+        "month": "2026-10",
+        "employer": "Westbridge Capital Advisors Pvt Ltd",
+        "employee_name": "Vikram Rathore Singhania",
+        "gross": 448219.0,
+        "net_pay": 320011.0,
+        "total_deductions": 128208.0
+      }
+    },
+    "form16_ay2026-27.pdf": {
+      "doc_type": "FORM16",
+      "source": "text",
+      "fields": {
+        "employer": "Westbridge Capital Advisors Pvt Ltd",
+        "ay": "2026-27",
+        "gross_salary": 5002124.0,
+        "taxable_income": 4924724.0,
+        "tax": 1099714.0,
+        "employee_name": "VIKRAM RATHORE SINGHANIA"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "VIKRAM RATHORE SINGHANIA",
+        "bank_name": "Konkan Coastal Bank",
+        "n_transactions": 155,
+        "opening_balance": 2150000,
+        "closing_balance": 3105704.54,
+        "period_start": "2026-05-01",
+        "period_end": "2026-10-31",
+        "total_credits": 1963010.38,
+        "total_debits": 1007305.84,
+        "salary_credits": 6,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 0
+      }
+    },
+    "agreement_for_sale.pdf": {
+      "doc_type": "SALE_DEED",
+      "source": "text",
+      "fields": {
+        "property_address": "Flat No. 3401, 34th Floor, Tower 2, Marine Crest, Prabhadevi, Mumbai 400025",
+        "consideration_value": 24000000.0,
+        "registration_no": "BBY-3/14277/2026",
+        "area_sqft": 1620.0,
+        "deed_type": "AGREEMENT_FOR_SALE",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.pdf": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "text",
+      "fields": {
+        "market_value": 24500000.0,
+        "distress_value": 19600000.0,
+        "realisable_value": 22050000.0,
+        "area_sqft": 1620.0,
+        "property_address": "Flat No. 3401, 34th Floor, Tower 2, Marine Crest, Prabhadevi, Mumbai 400025"
+      }
+    }
+  },
+  "facts": {
+    "name": "VIKRAM RATHORE SINGHANIA",
+    "form_name": "Vikram Rathore Singhania",
+    "dob": "1979-03-14",
+    "pan_masked": "XXXXX7319K",
+    "aadhaar_masked": "XXXX XXXX 6615",
+    "employment_type": "SALARIED",
+    "employer": "Westbridge Capital Advisors Pvt Ltd",
+    "actual_net_salary": 320011.0,
+    "slip_net_pay": 320011.0,
+    "declared_monthly_income": 320000.0,
+    "form16": {
+      "employer": "Westbridge Capital Advisors Pvt Ltd",
+      "ay": "2026-27",
+      "gross_salary": 5002124.0,
+      "taxable_income": 4924724.0,
+      "tax": 1099714.0,
+      "employee_name": "VIKRAM RATHORE SINGHANIA"
+    },
+    "itr": null,
+    "property_market_value": 24500000.0,
+    "property_distress_value": 19600000.0,
+    "consideration_value": 24000000.0,
+    "registration_no": "BBY-3/14277/2026",
+    "statement_months": 6,
+    "salary_credits": 6,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 0
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [],
+  "missing_documents": []
+}

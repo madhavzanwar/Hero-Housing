@@ -1,0 +1,31 @@
+{
+  "product": "LAP",
+  "applicant_name": "Dr Lakshmi Subramanian",
+  "dob": "1978-08-30",
+  "gender": "F",
+  "mobile_masked": "XXXXXX2278",
+  "city": "Chennai",
+  "employment_type": "SELF_EMPLOYED",
+  "employer_or_business": "Sri Lakshmi Multispeciality Clinic",
+  "years_in_job": 16,
+  "declared_monthly_income": 315000.0,
+  "existing_emi": 0.0,
+  "bureau_score": 812,
+  "loan_amount": 8000000,
+  "tenure_months": 180,
+  "property_value": 15000000,
+  "property_type": "COMMERCIAL",
+  "property_city": "Chennai",
+  "purpose": "Loan against property",
+  "lap_end_use": "Business expansion",
+  "co_applicant": null,
+  "is_first_home": false,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p09",
+    "title": "LAP for doctor's clinic on commercial property, Chennai",
+    "segment": "Self-employed Professional - LAP",
+    "story": "Dr Lakshmi, 48, runs a multispeciality clinic. LAP of Rs 80 lakh against her Rs 1.5 Cr commercial premises (LTV 53%, within the 55% commercial cap) to buy diagnostic equipment. Strong ITRs, digital receipts.",
+    "expected_outcome": "APPROVE"
+  }
+}

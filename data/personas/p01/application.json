@@ -1,0 +1,31 @@
+{
+  "product": "HOME_LOAN",
+  "applicant_name": "Aarav Deshmukh",
+  "dob": "1994-06-18",
+  "gender": "M",
+  "mobile_masked": "XXXXXX4521",
+  "city": "Pune",
+  "employment_type": "SALARIED",
+  "employer_or_business": "Acme Infotech Pvt Ltd",
+  "years_in_job": 6.3,
+  "declared_monthly_income": 145000.0,
+  "existing_emi": 0.0,
+  "bureau_score": 782,
+  "loan_amount": 4500000,
+  "tenure_months": 240,
+  "property_value": 6200000,
+  "property_type": "RESIDENTIAL",
+  "property_city": "Pune",
+  "purpose": "Purchase of residential flat",
+  "lap_end_use": null,
+  "co_applicant": null,
+  "is_first_home": true,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p01",
+    "title": "Clean salaried IT engineer, Pune",
+    "segment": "Salaried - Prime",
+    "story": "Aarav, 32, is a senior software engineer at Acme Infotech with 6 years in the job. Buying his first 2BHK in Baner. Clean bureau, salary credited every month, no loans.",
+    "expected_outcome": "APPROVE"
+  }
+}

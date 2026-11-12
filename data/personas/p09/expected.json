@@ -1,0 +1,144 @@
+{
+  "persona_id": "p09",
+  "expected_outcome": "APPROVE",
+  "acceptable_outcomes": [
+    "APPROVE"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "LAKSHMI SUBRAMANIAN",
+        "dob": "1978-08-30",
+        "pan_masked": "XXXXX6603N",
+        "father_name": "SUBRAMANIAN KRISHNAMURTHY"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Lakshmi Subramanian",
+        "dob": "1978-08-30",
+        "aadhaar_masked": "XXXX XXXX 2296",
+        "gender": "F",
+        "pincode": "600020"
+      }
+    },
+    "itr_v_ay2025-26.png": {
+      "doc_type": "ITR",
+      "source": "ocr",
+      "fields": {
+        "ay": "2025-26",
+        "total_income": 3890000.0,
+        "gross_total_income": 4040000.0,
+        "form": "ITR-3",
+        "tax_paid": 776880.0,
+        "name": "LAKSHMI SUBRAMANIAN"
+      }
+    },
+    "itr_v_ay2026-27.pdf": {
+      "doc_type": "ITR",
+      "source": "text",
+      "fields": {
+        "ay": "2026-27",
+        "total_income": 4260000.0,
+        "gross_total_income": 4410000.0,
+        "form": "ITR-3",
+        "tax_paid": 892320.0,
+        "name": "LAKSHMI SUBRAMANIAN"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "LAKSHMI SUBRAMANIAN",
+        "bank_name": "Coromandel Union Bank",
+        "n_transactions": 452,
+        "opening_balance": 1480000,
+        "closing_balance": 3790248.0,
+        "period_start": "2025-11-01",
+        "period_end": "2026-10-31",
+        "total_credits": 5514010.92,
+        "total_debits": 3203762.92,
+        "salary_credits": 0,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 0
+      }
+    },
+    "title_deed.pdf": {
+      "doc_type": "SALE_DEED",
+      "source": "text",
+      "fields": {
+        "property_address": "Ground & First Floor, No. 48, LB Road, Thiruvanmiyur, Chennai 600041",
+        "consideration_value": 6200000.0,
+        "registration_no": "ADR-1/1876/2012",
+        "area_sqft": 2400.0,
+        "deed_type": "TITLE_DEED",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.png": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "ocr",
+      "fields": {
+        "market_value": 15000000.0,
+        "distress_value": 12000000.0,
+        "realisable_value": 13500000.0,
+        "area_sqft": 2400.0,
+        "property_address": "Ground & First Floor, No. 48, LB Road, Thiruvanmiyur, Chennai 600041"
+      }
+    }
+  },
+  "facts": {
+    "name": "LAKSHMI SUBRAMANIAN",
+    "form_name": "Dr Lakshmi Subramanian",
+    "dob": "1978-08-30",
+    "pan_masked": "XXXXX6603N",
+    "aadhaar_masked": "XXXX XXXX 2296",
+    "employment_type": "SELF_EMPLOYED",
+    "employer": "Sri Lakshmi Multispeciality Clinic",
+    "actual_net_salary": 0.0,
+    "slip_net_pay": null,
+    "declared_monthly_income": 315000.0,
+    "form16": null,
+    "itr": [
+      {
+        "ay": "2025-26",
+        "total_income": 3890000.0,
+        "gross_total_income": 4040000.0,
+        "form": "ITR-3",
+        "tax_paid": 776880.0,
+        "name": "LAKSHMI SUBRAMANIAN"
+      },
+      {
+        "ay": "2026-27",
+        "total_income": 4260000.0,
+        "gross_total_income": 4410000.0,
+        "form": "ITR-3",
+        "tax_paid": 892320.0,
+        "name": "LAKSHMI SUBRAMANIAN"
+      }
+    ],
+    "property_market_value": 15000000.0,
+    "property_distress_value": 12000000.0,
+    "consideration_value": 6200000.0,
+    "registration_no": "ADR-1/1876/2012",
+    "statement_months": 12,
+    "salary_credits": 0,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 0
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [
+    "HIGH",
+    "CRITICAL"
+  ],
+  "missing_documents": []
+}

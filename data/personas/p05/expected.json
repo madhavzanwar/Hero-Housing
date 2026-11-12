@@ -1,0 +1,155 @@
+{
+  "persona_id": "p05",
+  "expected_outcome": "APPROVE_WITH_CONDITIONS",
+  "acceptable_outcomes": [
+    "APPROVE_WITH_CONDITIONS"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "KARTHIK RAMAN NAIR",
+        "dob": "1990-12-03",
+        "pan_masked": "XXXXX3308C",
+        "father_name": "RAMAN NAIR"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Karthik Raman Nair",
+        "dob": "1990-12-03",
+        "aadhaar_masked": "XXXX XXXX 3370",
+        "gender": "M",
+        "pincode": "560102"
+      }
+    },
+    "salary_slip_2026-08.png": {
+      "doc_type": "SALARY_SLIP",
+      "source": "ocr",
+      "fields": {
+        "month": "2026-08",
+        "employer": "Bluepeak Software Solutions Pvt Ltd",
+        "employee_name": "Karthik Raman Nair",
+        "gross": 125111.0,
+        "net_pay": 110013.0,
+        "total_deductions": 15098.0
+      }
+    },
+    "salary_slip_2026-09.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-09",
+        "employer": "Bluepeak Software Solutions Pvt Ltd",
+        "employee_name": "Karthik Raman Nair",
+        "gross": 125111.0,
+        "net_pay": 110013.0,
+        "total_deductions": 15098.0
+      }
+    },
+    "salary_slip_2026-10.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-10",
+        "employer": "Bluepeak Software Solutions Pvt Ltd",
+        "employee_name": "Karthik Raman Nair",
+        "gross": 125111.0,
+        "net_pay": 110013.0,
+        "total_deductions": 15098.0
+      }
+    },
+    "form16_ay2026-27.pdf": {
+      "doc_type": "FORM16",
+      "source": "text",
+      "fields": {
+        "employer": "Bluepeak Software Solutions Pvt Ltd",
+        "ay": "2026-27",
+        "gross_salary": 1396239.0,
+        "taxable_income": 1318839.0,
+        "tax": 80939.0,
+        "employee_name": "KARTHIK RAMAN NAIR"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "KARTHIK RAMAN NAIR",
+        "bank_name": "Coromandel Union Bank",
+        "n_transactions": 154,
+        "opening_balance": 86000,
+        "closing_balance": 157188.05,
+        "period_start": "2026-05-01",
+        "period_end": "2026-10-31",
+        "total_credits": 664114.17,
+        "total_debits": 592926.12,
+        "salary_credits": 6,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 12
+      }
+    },
+    "sale_deed.pdf": {
+      "doc_type": "SALE_DEED",
+      "source": "text",
+      "fields": {
+        "property_address": "Flat No. B-905, Greenfields Meadows, Sarjapur Road, Bengaluru 560035",
+        "consideration_value": 8500000.0,
+        "registration_no": "SJP-1/6610/2026",
+        "area_sqft": 1240.0,
+        "deed_type": "SALE_DEED",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.pdf": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "text",
+      "fields": {
+        "market_value": 8650000.0,
+        "distress_value": 6920000.0,
+        "realisable_value": 7785000.0,
+        "area_sqft": 1240.0,
+        "property_address": "Flat No. B-905, Greenfields Meadows, Sarjapur Road, Bengaluru 560035"
+      }
+    }
+  },
+  "facts": {
+    "name": "KARTHIK RAMAN NAIR",
+    "form_name": "Karthik Nair",
+    "dob": "1990-12-03",
+    "pan_masked": "XXXXX3308C",
+    "aadhaar_masked": "XXXX XXXX 3370",
+    "employment_type": "SALARIED",
+    "employer": "Bluepeak Software Solutions Pvt Ltd",
+    "actual_net_salary": 110013.0,
+    "slip_net_pay": 110013.0,
+    "declared_monthly_income": 110000.0,
+    "form16": {
+      "employer": "Bluepeak Software Solutions Pvt Ltd",
+      "ay": "2026-27",
+      "gross_salary": 1396239.0,
+      "taxable_income": 1318839.0,
+      "tax": 80939.0,
+      "employee_name": "KARTHIK RAMAN NAIR"
+    },
+    "itr": null,
+    "property_market_value": 8650000.0,
+    "property_distress_value": 6920000.0,
+    "consideration_value": 8500000.0,
+    "registration_no": "SJP-1/6610/2026",
+    "statement_months": 6,
+    "salary_credits": 6,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 12
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [],
+  "missing_documents": []
+}

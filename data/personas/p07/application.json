@@ -1,0 +1,31 @@
+{
+  "product": "HOME_LOAN",
+  "applicant_name": "Nikhil Verma",
+  "dob": "1991-04-16",
+  "gender": "M",
+  "mobile_masked": "XXXXXX4290",
+  "city": "Noida",
+  "employment_type": "SALARIED",
+  "employer_or_business": "Zenith Retail Ventures Pvt Ltd",
+  "years_in_job": 4.8,
+  "declared_monthly_income": 180000.0,
+  "existing_emi": 0.0,
+  "bureau_score": 731,
+  "loan_amount": 7000000,
+  "tenure_months": 240,
+  "property_value": 9500000,
+  "property_type": "RESIDENTIAL",
+  "property_city": "Noida",
+  "purpose": "Purchase of residential flat",
+  "lap_end_use": null,
+  "co_applicant": null,
+  "is_first_home": true,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p07",
+    "title": "FRAUD: tampered salary slips, inflated income, Noida",
+    "segment": "Salaried - Fraud",
+    "story": "Nikhil declares Rs 1.8 lakh/month. His salary slips were edited in iLovePDF (net pay typed in a different font, round figures), but the bank shows a Rs 85k salary credit and Form 16 shows ~Rs 12 lakh a year.",
+    "expected_outcome": "DECLINE"
+  }
+}

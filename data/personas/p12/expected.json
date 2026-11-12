@@ -1,0 +1,158 @@
+{
+  "persona_id": "p12",
+  "expected_outcome": "APPROVE_WITH_CONDITIONS",
+  "acceptable_outcomes": [
+    "APPROVE_WITH_CONDITIONS"
+  ],
+  "documents": {
+    "pan_card.png": {
+      "doc_type": "PAN",
+      "source": "ocr",
+      "fields": {
+        "name": "PRIYA HIREN PATEL",
+        "dob": "2000-01-26",
+        "pan_masked": "XXXXX2047B",
+        "father_name": "HIREN PATEL"
+      }
+    },
+    "aadhaar_card.png": {
+      "doc_type": "AADHAAR",
+      "source": "ocr",
+      "fields": {
+        "name": "Priya Hiren Patel",
+        "dob": "2000-01-26",
+        "aadhaar_masked": "XXXX XXXX 3347",
+        "gender": "F",
+        "pincode": "380015"
+      }
+    },
+    "salary_slip_2026-08.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-08",
+        "employer": "Sabarmati Fintech Labs Pvt Ltd",
+        "employee_name": "Priya Hiren Patel",
+        "gross": 72110.0,
+        "net_pay": 68016.0,
+        "total_deductions": 4094.0
+      }
+    },
+    "salary_slip_2026-09.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-09",
+        "employer": "Sabarmati Fintech Labs Pvt Ltd",
+        "employee_name": "Priya Hiren Patel",
+        "gross": 72110.0,
+        "net_pay": 68016.0,
+        "total_deductions": 4094.0
+      }
+    },
+    "salary_slip_2026-10.pdf": {
+      "doc_type": "SALARY_SLIP",
+      "source": "text",
+      "fields": {
+        "month": "2026-10",
+        "employer": "Sabarmati Fintech Labs Pvt Ltd",
+        "employee_name": "Priya Hiren Patel",
+        "gross": 72110.0,
+        "net_pay": 68016.0,
+        "total_deductions": 4094.0
+      }
+    },
+    "form16_ay2026-27.png": {
+      "doc_type": "FORM16",
+      "source": "ocr",
+      "fields": {
+        "employer": "Sabarmati Fintech Labs Pvt Ltd",
+        "ay": "2026-27",
+        "gross_salary": 804748.0,
+        "taxable_income": 727348.0,
+        "tax": 0.0,
+        "employee_name": "PRIYA HIREN PATEL"
+      }
+    },
+    "bank_statement.pdf": {
+      "doc_type": "BANK_STATEMENT",
+      "source": "text",
+      "fields": {
+        "account_holder": "PRIYA HIREN PATEL",
+        "bank_name": "Sabarmati People's Bank",
+        "n_transactions": 142,
+        "opening_balance": 118000,
+        "closing_balance": 205982.42,
+        "period_start": "2026-05-01",
+        "period_end": "2026-10-31",
+        "total_credits": 410609.64,
+        "total_debits": 322627.22,
+        "salary_credits": 6,
+        "bounces": 0,
+        "gambling_txns": 0,
+        "cash_deposits": 0,
+        "emi_debits": 0
+      }
+    },
+    "sale_deed.pdf": {
+      "doc_type": "SALE_DEED",
+      "source": "text",
+      "fields": {
+        "property_address": "Flat No. A-602, Shaligram Lakeview, Vastrapur, Ahmedabad 380015",
+        "consideration_value": 3100000.0,
+        "registration_no": "AHD-8/7390/2026",
+        "area_sqft": 690.0,
+        "deed_type": "SALE_DEED",
+        "encumbrance": "NIL"
+      }
+    },
+    "valuation_report.png": {
+      "doc_type": "VALUATION_REPORT",
+      "source": "ocr",
+      "fields": {
+        "market_value": 3150000.0,
+        "distress_value": 2520000.0,
+        "realisable_value": 2835000.0,
+        "area_sqft": 690.0,
+        "property_address": "Flat No. A-602, Shaligram Lakeview, Vastrapur, Ahmedabad 380015"
+      }
+    }
+  },
+  "facts": {
+    "name": "PRIYA HIREN PATEL",
+    "form_name": "Priya Patel",
+    "dob": "2000-01-26",
+    "pan_masked": "XXXXX2047B",
+    "aadhaar_masked": "XXXX XXXX 3347",
+    "employment_type": "SALARIED",
+    "employer": "Sabarmati Fintech Labs Pvt Ltd",
+    "actual_net_salary": 68016.0,
+    "slip_net_pay": 68016.0,
+    "declared_monthly_income": 68000.0,
+    "form16": {
+      "employer": "Sabarmati Fintech Labs Pvt Ltd",
+      "ay": "2026-27",
+      "gross_salary": 804748.0,
+      "taxable_income": 727348.0,
+      "tax": 0.0,
+      "employee_name": "PRIYA HIREN PATEL"
+    },
+    "itr": null,
+    "property_market_value": 3150000.0,
+    "property_distress_value": 2520000.0,
+    "consideration_value": 3100000.0,
+    "registration_no": "AHD-8/7390/2026",
+    "statement_months": 6,
+    "salary_credits": 6,
+    "bounces": 0,
+    "gambling_txns": 0,
+    "cash_deposits": 0,
+    "emi_debits": 0
+  },
+  "expected_flags": [],
+  "forbidden_flag_severities": [
+    "HIGH",
+    "CRITICAL"
+  ],
+  "missing_documents": []
+}

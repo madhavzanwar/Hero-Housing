@@ -1,0 +1,36 @@
+{
+  "product": "HOME_LOAN",
+  "applicant_name": "Sunita Wankhede",
+  "dob": "1984-02-11",
+  "gender": "F",
+  "mobile_masked": "XXXXXX7788",
+  "city": "Nagpur",
+  "employment_type": "SALARIED",
+  "employer_or_business": "Vidarbha Shikshan Prasarak Mandal (Govt. Aided)",
+  "years_in_job": 17.4,
+  "declared_monthly_income": 52000.0,
+  "existing_emi": 0.0,
+  "bureau_score": 771,
+  "loan_amount": 2200000,
+  "tenure_months": 192,
+  "property_value": 2600000,
+  "property_type": "RESIDENTIAL",
+  "property_city": "Nagpur",
+  "purpose": "Purchase of residential flat",
+  "lap_end_use": null,
+  "co_applicant": {
+    "name": "Rajesh Wankhede",
+    "relation": "Spouse",
+    "monthly_net_income": 48000,
+    "existing_emi": 0
+  },
+  "is_first_home": true,
+  "rate_type": "FLOATING",
+  "persona": {
+    "id": "p02",
+    "title": "Govt teacher couple with co-applicant, Nagpur",
+    "segment": "Salaried - Government",
+    "story": "Sunita, 42, teaches at a government-aided school; husband Rajesh (also a teacher) is co-applicant. Buying a ready flat in Nagpur; LTV 84.6% within the 90% slab for loans up to Rs 30 lakh.",
+    "expected_outcome": "APPROVE"
+  }
+}
