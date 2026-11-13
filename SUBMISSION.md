@@ -1,6 +1,6 @@
 # Submission — Hero Housing Fintech Challenge (E-Cell IIT Bombay × Hero Housing Finance)
 
-**Team:** DoubleStack — Madhav Zanwar, Divyani Papalkar (PCCoE, Pune)
+**Team:** DoubleStack (PCCoE, Pune)
 **Problem statement:** PS2 — Digitally Automated Mortgage Underwriting Engine (Home Loans & LAP)
 
 ## Title

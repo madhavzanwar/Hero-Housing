@@ -173,7 +173,7 @@ def main() -> None:
            Inches(0.8), Inches(3.9), Inches(7.6), Inches(1.2), 17, GRAPHITE)
     for i, t in enumerate(["Rules + ML hybrid", "RBI HFC Directions 2025 cited", "Runs with no paid keys"]):
         d.chip(s, "✓ " + t, Inches(0.8 + i * 2.75), Inches(5.3), PAPER, INK, Inches(2.6))
-    d.text(s, "Team DoubleStack — Madhav Zanwar · Divyani Papalkar · PCCoE Pune", Inches(0.8), Inches(6.2), Inches(8), Inches(0.4), 14, INK, bold=True)
+    d.text(s, "Team DoubleStack · PCCoE Pune", Inches(0.8), Inches(6.2), Inches(8), Inches(0.4), 14, INK, bold=True)
     d.image(s, "case_decision.png", Inches(8.7), Inches(1.0), w=Inches(4.2))
 
     # 2 — Problem ---------------------------------------------------------------------------
@@ -311,12 +311,6 @@ def main() -> None:
 
     # 12 — Team ---------------------------------------------------------------------------------
     s = d.slide("Team DoubleStack", "Thank you")
-    for i, (name, role) in enumerate([("Madhav Zanwar", "Engineering · ML · Product"), ("Divyani Papalkar", "Credit policy · Design · Research")]):
-        x = Inches(0.6 + i * 4.15)
-        d.card(s, x, Inches(1.9), Inches(3.95), Inches(2.2), PAPER)
-        d.text(s, name, x + Inches(0.3), Inches(2.2), Inches(3.4), Inches(0.6), 24, INK, font=DISPLAY, bold=True)
-        d.text(s, role, x + Inches(0.3), Inches(2.85), Inches(3.4), Inches(0.5), 14, GRAPHITE)
-        d.text(s, "PCCoE, Pune", x + Inches(0.3), Inches(3.4), Inches(3.4), Inches(0.4), 13, PEWTER)
     d.card(s, Inches(8.9), Inches(1.9), Inches(3.8), Inches(2.2), LIME)
     d.text(s, "Built on our own FinPilot\n(health score + Monte Carlo)\nand open source: LightGBM,\nSHAP, fairlearn, LangGraph,\nPaddleOCR, FastAPI, React.",
            Inches(9.15), Inches(2.1), Inches(3.4), Inches(1.9), 13, INK)

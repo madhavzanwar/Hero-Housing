@@ -4,7 +4,7 @@
 
 ### Explainable mortgage underwriting in minutes — Home Loans & Loans Against Property
 
-**Team DoubleStack** (Madhav Zanwar · Divyani Papalkar, PCCoE Pune) ·
+**Team DoubleStack** (PCCoE Pune) ·
 Hero Housing Fintech Challenge (E-Cell IIT Bombay × Hero Housing Finance) · **Problem Statement 2**
 
 `FastAPI` · `LangGraph` · `LightGBM + SHAP` · `fairlearn` · `PaddleOCR (ONNX)` · `React + Vite + Tailwind` · `MIT`
