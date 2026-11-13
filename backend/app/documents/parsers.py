@@ -437,6 +437,8 @@ def parse_sale_deed(text: str) -> dict[str, Any]:
         "vendor": clean_name(value_after(t, "Vendor")),
         "encumbrance": encumbrance,
         "sro": value_block(t, "Registering Office", max_lines=1),
+        "description": value_after(t, "Description"),
+        **property_extras(t),
     }
 
 
@@ -455,4 +457,42 @@ def parse_valuation(text: str) -> dict[str, Any]:
         "agreement_value": money_after(t, "Agreement / Purchase Value"),
         "area_sqft": parse_amount(area.group(1)) if area else None,
         "inspection_date": parse_date((re.search(r"(?i)date\W*of\W*inspection\W*" + DATE_RE, t) or [None, ""])[1] or ""),
+        "property_kind": _kind(value_after(t, "Type of Property")),
+        "description": value_after(t, "Description"),
+        "adopted_rate_per_sqft": money_after(t, "Adopted Rate"),
+        "occupancy": value_after(t, "Occupancy"),
+        **_age_life(t),
+        **property_extras(t),
     }
+
+
+def _kind(v: str | None) -> str | None:
+    if not v:
+        return None
+    for k in ("Residential", "Commercial", "Industrial", "Plot"):
+        if k.lower() in v.lower():
+            return k
+    return v
+
+
+def _age_life(t: str) -> dict[str, Any]:
+    m = re.search(r"(?i)age\W*of\W*building.*?[:\-]\s*(\d+(?:\.\d+)?)\W*years?\W*/?\W*(\d+(?:\.\d+)?)\W*years?", t)
+    if not m:
+        return {}
+    return {"building_age_years": float(m.group(1)), "residual_life_years": float(m.group(2))}
+
+
+def property_extras(t: str) -> dict[str, Any]:
+    """Legal/technical signals: plan approval, RERA registration, OC/CC mentions (absent keys if not stated)."""
+    out: dict[str, Any] = {}
+    sq = re.sub(r"\s+", " ", t.lower())
+    if re.search(r"deviation|unauthori[sz]ed|not\W*as\W*per\W*(the\W*)?san\w{0,3}ction", sq):
+        out["plan_approved"] = False
+    elif re.search(r"as\W*per\W*(the\W*)?san\w{0,3}ction\w*\W*plan", sq):
+        out["plan_approved"] = True
+    rera = re.search(r"(?i)RERA\W*(?:Reg(?:istration)?\.?\W*)?(?:No\.?|Number)?\W*([A-Z]{1,4}[0-9]{6,14}|[A-Z0-9/\-]{8,30}\d)", t)
+    if rera:
+        out["rera_no"] = rera.group(1)
+    if re.search(r"(?i)occupancy\W*certificate|completion\W*certificate|\bO\.?C\.?\b|\bC\.?C\.?\b\s*(?:no|dated|issued)", t):
+        out["oc_cc"] = True
+    return out

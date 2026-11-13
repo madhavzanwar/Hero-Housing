@@ -11,7 +11,13 @@ import type {
   PersonaInfo,
   PolicyDoc,
   PortfolioMetrics,
+  QueueGroup,
+  ReplayResult,
+  SimulateRequest,
+  SimulateResult,
+  Kfs,
 } from "./types";
+import { normalizeQueues, normalizeReplay, normalizeSimulate } from "./normalize";
 import { getMode, setMode } from "./mode";
 import * as demo from "./demo";
 
@@ -181,6 +187,24 @@ export const api = {
   portfolio: () => withFallback(() => getJson<PortfolioMetrics>("/portfolio"), demo.portfolio),
   policy: () => withFallback(() => getJson<PolicyDoc>("/policy"), demo.policy),
   modelCard: () => withFallback(() => getJson<ModelCard>("/model-card"), demo.modelCard),
+
+  replay: (id: string) =>
+    withFallback(async () => normalizeReplay(await postJson<unknown>(`/cases/${id}/replay`, {})), (): Promise<ReplayResult> => demo.replay(id)),
+
+  queues: () => withFallback(async (): Promise<QueueGroup[]> => normalizeQueues(await getJson<unknown>("/queues")), demo.queues),
+
+  simulate: (req: SimulateRequest) =>
+    withFallback(async (): Promise<SimulateResult> => normalizeSimulate(await postJson<unknown>("/policy/simulate", req)), () => demo.simulate(req)),
+
+  kfs: (id: string, lang: "en" | "hi") =>
+    withFallback(
+      async (): Promise<Kfs> => {
+        const res = await send(`/cases/${id}/kfs?lang=${lang}`);
+        const type = res.headers.get("content-type") ?? "";
+        return type.includes("json") ? ((await res.json()) as Kfs) : res.text();
+      },
+      () => demo.kfs(id, lang),
+    ),
 
   resetDemo: () =>
     withFallback(() => postJson<DemoResetResponse>("/demo/reset", {}), demo.reset),

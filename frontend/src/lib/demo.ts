@@ -18,8 +18,14 @@ import type {
   PersonaInfo,
   PolicyDoc,
   PortfolioMetrics,
+  QueueGroup,
+  ReplayResult,
+  SimulateRequest,
+  SimulateResult,
+  Kfs,
 } from "./types";
 import { answerOffline } from "./demoCopilot";
+import { queuesFromCases } from "./normalize";
 
 const OVERRIDES_KEY = "fphl:demo-overrides";
 
@@ -219,12 +225,18 @@ export function documentUrl(caseId: string, docId: string): string {
 
 export async function override(id: string, req: OverrideRequest): Promise<CaseDetail> {
   const base = await getCase(id);
+  if (base.governance?.four_eyes_required) {
+    const second = req.second_approver?.trim();
+    if (!second || second.toLowerCase() === req.underwriter.trim().toLowerCase()) {
+      throw new Error("Four-eyes rule: a second approver (different from the underwriter) is required for this override.");
+    }
+  }
   const entry: Override = {
     at: new Date().toISOString(),
     underwriter: req.underwriter,
     from_outcome: base.decision.outcome,
     to_outcome: req.to_outcome,
-    reason: req.reason,
+    reason: req.second_approver ? `${req.reason} (second approver: ${req.second_approver})` : req.reason,
     sanctioned_amount: req.sanctioned_amount ?? null,
   };
   const store = readOverrides();
@@ -280,4 +292,56 @@ export async function reset(): Promise<DemoResetResponse> {
   writeOverrides({});
   const snap = await loadSnapshot();
   return { cases: snap.cases.length, errors: [], ms: 0 };
+}
+
+/** Offline replay: the snapshot is deterministic, so the replayed hash equals the stored one. */
+export async function replay(id: string): Promise<ReplayResult> {
+  const c = await getCase(id);
+  const g = c.governance;
+  const h = g?.decision_hash ?? "";
+  return {
+    match: true,
+    decision_hash: h,
+    replay_hash: h,
+    input_hash: g?.input_hash,
+    policy_hash: g?.policy_hash,
+    outcome: c.decision.engine_outcome,
+    note: "Offline demo: replayed from the frozen snapshot inputs.",
+  };
+}
+
+export async function queues(): Promise<QueueGroup[]> {
+  const snap = await loadSnapshot();
+  if (snap.queues?.length) return snap.queues;
+  const cases = await allCases();
+  return queuesFromCases(
+    cases.map((c) => ({ summary: summarize(c), queue: c.governance?.queue, sla: c.governance?.sla_due_at, reason: c.governance?.stp_reason })),
+  );
+}
+
+function distance(a: SimulateRequest, b: SimulateRequest): number {
+  let d = 0;
+  const keys = new Set([...Object.keys(a.foir_caps ?? {}), ...Object.keys(b.foir_caps ?? {})]);
+  keys.forEach((k) => (d += Math.abs((a.foir_caps?.[k] ?? 0) - (b.foir_caps?.[k] ?? 0)) * 100));
+  const lk = new Set([...Object.keys(a.ltv_caps ?? {}), ...Object.keys(b.ltv_caps ?? {})]);
+  lk.forEach((k) => (d += Math.abs((a.ltv_caps?.[k] ?? 0) - (b.ltv_caps?.[k] ?? 0)) * 100));
+  d += Math.abs((a.min_bureau_score ?? 0) - (b.min_bureau_score ?? 0)) / 5;
+  return d;
+}
+
+/** Offline simulator: nearest precomputed preset from the snapshot. */
+export async function simulate(req: SimulateRequest): Promise<SimulateResult & { preset?: boolean }> {
+  const snap = await loadSnapshot();
+  const sims = snap.simulations ?? [];
+  if (!sims.length) throw new Error("The offline snapshot has no precomputed policy simulations.");
+  const best = sims.reduce((acc, s) => (distance(s.request, req) < distance(acc.request, req) ? s : acc), sims[0]);
+  return { ...best.result, preset: true };
+}
+
+export async function kfs(id: string, lang: "en" | "hi"): Promise<Kfs> {
+  const snap = await loadSnapshot();
+  const k = snap.kfs?.[id];
+  const v = (lang === "hi" ? k?.hi : k?.en) ?? k?.en;
+  if (v) return v;
+  throw notFound(`KFS for ${id}`);
 }

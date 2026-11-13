@@ -334,6 +334,7 @@ class Override(BaseModel):
     to_outcome: DecisionOutcome
     reason: str
     sanctioned_amount: float | None = None
+    approver2: str | None = None   # four-eyes second approver (fraud / AML overrides)
 
 
 class AuditEvent(BaseModel):
@@ -491,6 +492,7 @@ class OverrideRequest(BaseModel):
     to_outcome: DecisionOutcome
     reason: str = Field(min_length=5)
     sanctioned_amount: float | None = None
+    approver2: str | None = None   # required (and != underwriter) when governance.four_eyes_required
 
 
 class CopilotRequest(BaseModel):
@@ -522,3 +524,9 @@ class PortfolioMetrics(BaseModel):
     override_rate: float
     grade_distribution: dict[str, int]
     top_rules: list[dict[str, Any]]
+    # governance (optional, phase 2)
+    stp_rate: float | None = None             # share of cases decided straight-through (humanless)
+    avg_decision_ms: float | None = None      # mean engine decision latency
+    challenger_agreement: float | None = None  # champion vs shadow challenger action agreement
+    sla_breached: int | None = None           # open referred cases past their SLA
+    queues: dict[str, int] | None = None      # open referred cases per queue

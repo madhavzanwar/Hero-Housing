@@ -340,6 +340,138 @@ export interface TraceStep {
   status: string;
 }
 
+/* ---------- Phase 2: data sources, property, governance ---------- */
+
+export type SourceKind = "BUREAU" | "KYC" | "BANKING" | "REGISTRY" | "SCREENING" | "EMPLOYMENT" | "PROPERTY";
+export type SourceStatus = "OK" | "NO_MATCH" | "HIT" | "ERROR" | "SKIPPED";
+export type SourceMode = "LIVE" | "SANDBOX_MOCK" | "OFFLINE_DATASET";
+
+export interface DataSourceResult {
+  source: string;
+  provider: string;
+  kind: SourceKind;
+  status: SourceStatus;
+  mode: SourceMode;
+  latency_ms: number;
+  consent_id?: string | null;
+  request_ref: string;
+  summary: string;
+  data: JsonObject;
+  fetched_at?: string | null;
+}
+
+export interface PropertyCheck {
+  check: string;
+  status: "PASS" | "WARN" | "FAIL" | "INFO";
+  detail: string;
+}
+
+export interface PropertyAssessment {
+  address: string;
+  city: string;
+  locality: string;
+  property_type: string;
+  area_sqft: number;
+  age_years?: number | null;
+  declared_value: number;
+  agreement_value?: number | null;
+  valuation_report_value?: number | null;
+  valuation_reports: number;
+  circle_rate_per_sqft?: number | null;
+  circle_value?: number | null;
+  avm_value: number;
+  avm_low: number;
+  avm_high: number;
+  avm_rate_per_sqft: number;
+  interval_coverage: number;
+  confidence: number;
+  reliability: "HIGH" | "MEDIUM" | "LOW";
+  route: "AUTO" | "DESKTOP_REVIEW" | "SITE_INSPECTION";
+  comparables: JsonObject[];
+  drivers: JsonObject[];
+  value_for_ltv: number;
+  value_basis: string;
+  checks: PropertyCheck[];
+  notes: string[];
+  model_version: string;
+}
+
+export interface Governance {
+  policy_version: string;
+  policy_hash: string;
+  model_version: string;
+  input_hash: string;
+  decision_hash: string;
+  challenger: JsonObject;
+  stp: boolean;
+  stp_reason: string;
+  queue?: string | null;
+  sla_due_at?: string | null;
+  four_eyes_required: boolean;
+  replayable: boolean;
+}
+
+/** POST /cases/{id}/replay (normalised in lib/api.ts). */
+export interface ReplayResult {
+  match: boolean;
+  decision_hash: string;
+  replay_hash: string;
+  input_hash?: string;
+  policy_hash?: string;
+  outcome?: string;
+  ms?: number;
+  note?: string;
+}
+
+export interface QueueItem {
+  id: string;
+  applicant_name: string;
+  outcome?: DecisionOutcome | null;
+  product?: Product | null;
+  loan_amount?: number | null;
+  sla_due_at?: string | null;
+  reason?: string;
+  persona_id?: string | null;
+}
+
+export interface QueueGroup {
+  queue: string;
+  label: string;
+  sla_hours?: number;
+  items: QueueItem[];
+}
+
+export interface SimulateRequest {
+  foir_caps?: Record<string, number>;
+  min_bureau_score?: number;
+  ltv_caps?: Record<string, number>;
+}
+
+export interface SimulateSide {
+  approval_rate: number;
+  expected_loss: number;
+  approved: number;
+  total: number;
+  stp_rate?: number;
+  by_outcome?: Record<string, number>;
+}
+
+export interface SimulateFlip {
+  case_id: string;
+  applicant_name: string;
+  from: string;
+  to: string;
+  reason: string;
+}
+
+export interface SimulateResult {
+  before: SimulateSide;
+  after: SimulateSide;
+  flips: SimulateFlip[];
+}
+
+export type Kfs = JsonObject | string;
+
 export interface CaseDetail {
   id: string;
   persona_id?: string | null;
@@ -357,6 +489,9 @@ export interface CaseDetail {
   audit: AuditEvent[];
   memo_markdown: string;
   copilot_trace: TraceStep[];
+  data_sources?: DataSourceResult[];
+  property?: PropertyAssessment | null;
+  governance?: Governance | null;
   disclaimer: string;
 }
 
@@ -365,6 +500,8 @@ export interface OverrideRequest {
   to_outcome: DecisionOutcome;
   reason: string;
   sanctioned_amount?: number | null;
+  /** Four-eyes: second approver, required when governance.four_eyes_required. */
+  second_approver?: string | null;
 }
 
 export interface CopilotRequest {
@@ -403,6 +540,8 @@ export interface PortfolioMetrics {
   override_rate: number;
   grade_distribution: Record<string, number>;
   top_rules: TopRule[];
+  stp_rate?: number;
+  queues?: Record<string, number>;
 }
 
 /* ---------- API-only response models (backend/app/api/routes.py) ---------- */
@@ -466,4 +605,8 @@ export interface DemoSnapshot {
   model_card: ModelCard;
   memos?: Record<string, string>;
   letters?: Record<string, string>;
+  kfs?: Record<string, { en?: Kfs; hi?: Kfs }>;
+  queues?: QueueGroup[];
+  /** Precomputed simulator presets: key = JSON of the SimulateRequest. */
+  simulations?: { request: SimulateRequest; result: SimulateResult }[];
 }

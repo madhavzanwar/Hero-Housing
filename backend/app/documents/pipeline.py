@@ -297,7 +297,21 @@ def _aggregate(bundle: DocumentBundle, parsed_docs: list[tuple[DocumentResult, d
         "encumbrance": deed.get("encumbrance") if deed_res else None,
         "valuation_date": val["inspection_date"].isoformat() if val.get("inspection_date") else None,
         "valuer": val.get("valuer"),
+        "property_kind": val.get("property_kind"),
+        "description": val.get("description") or deed.get("description"),
+        "adopted_rate_per_sqft": val.get("adopted_rate_per_sqft"),
+        "building_age_years": val.get("building_age_years"),
+        "residual_life_years": val.get("residual_life_years"),
+        "occupancy": val.get("occupancy"),
     }
+    for key in ("plan_approved", "rera_no", "oc_cc"):
+        seen = [p[key] for p in (val, deed) if key in p]
+        if seen:  # a negative plan finding anywhere wins
+            prop[key] = min(seen) if key == "plan_approved" else seen[0]
+    valuations = by_type.get(DocType.VALUATION_REPORT, [])
+    if valuations:
+        prop["valuation_reports"] = len(valuations)
+        prop["valuation_values"] = [p.get("market_value") for _r, p in valuations]
     bundle.property = {k: v for k, v in prop.items() if v is not None}
 
     # ---- cross checks
