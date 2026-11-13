@@ -26,3 +26,4 @@ e2e/playwright-report/
 # Generated
 *.log
 data/personas/*_upload_pack.zip
+out/png/
